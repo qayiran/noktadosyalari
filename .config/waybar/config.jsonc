@@ -1,0 +1,91 @@
+{
+    "layer": "top",
+    "position": "top",
+    "exclusive": true,
+    "modules-left": ["clock"],
+    "modules-center": [
+        "custom/vivaldi",
+        "custom/steam",
+        "custom/telegram",
+        "custom/discord",
+	"custom/apple-music"
+    ],
+    "modules-right": ["custom/cpu-temp", "custom/headset", "pulseaudio", "network", "battery"],
+
+    // YOUR HEADSET MODULE
+    "custom/headset": {
+        "exec": "headsetcontrol -b | grep -o '[0-9]*%' | tr -d '%'",
+        "interval": 60,
+        "format": "  %{}",
+	"tooltip": false
+    },
+
+    "clock": {
+        "format": "{:%H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "battery": {
+    	"bat": "BAT1",
+   	 "interval": 10,
+    	"format": "%{capacity}",
+    	"format-charging": "󱐋 %{capacity}",
+    	"format-plugged": " %{capacity}"
+    },
+    "network": {
+        // Still NO interface line here, so it works for both!
+        "format-wifi": "󰖩 {essid}",
+        "format-ethernet": "󰈀 {ifname}",
+        "format-disconnected": "󰖫 Bağlantı Yok", 
+        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "tooltip-format-wifi": "{essid} ({signaldBm}dBm) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Bağlantı Kesildi",
+        "max-length": 50,
+        "on-click": "rofi -show wifi -iface wlp59s0f0"
+    },
+    "pulseaudio": {
+        "format": "  %{volume}",
+        "format-muted": " Sessiz",
+        "on-click": "pavucontrol",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "default": ["", "", ""]
+        }
+    },
+	"custom/vivaldi": {
+        	"format": "●",
+        	"on-click": "vivaldi-fix.sh",
+        	"tooltip": false
+    },
+	"custom/steam": {
+    		"format": "●",
+    		"on-click": "steam",
+    		"tooltip": false
+    }, // <--- DON'T FORGET THIS COMMA if there is more stuff below!
+
+   	"custom/telegram": {
+        	"format": "●",
+        	"on-click": "Telegram",
+        	"tooltip": false
+    },
+
+    	"custom/discord": {
+        	"format": "●",
+        	"on-click": "vesktop",
+	       	"tooltip": false
+    },
+	"custom/apple-music": {
+    		"format": "●", 
+    		"on-click": "vivaldi-stable --profile-directory=Default --app-id=blgdilankhbcpipclgpdndahbehalgkh",
+    		"tooltip": false
+    },
+    	"custom/cpu-temp": {
+    		"exec": "cat /sys/devices/platform/msi-ec/cpu/realtime_temperature",
+     		"critical-threshold": 80,
+    		"interval": 2,
+    		"format": " {text}°S",
+    		"format-icons": ["", "", ""],
+    		"tooltip": false
+    }
+}

@@ -1,0 +1,125 @@
+configuration {
+    modes: "window,drun,run,ssh";
+    font: "JetBrainsMono Nerd Font 13";
+    markup-rows: true;
+
+    display-drun: "uygulamalar";
+        display-run: "çalıştır";
+        display-window: "pencereler";
+        display-ssh: "ssh";
+}
+
+/* * * I hope you like mustard on your ketchup!
+ */
+* {
+    bg: #1a1a1a;            /* Kara */
+    fg: #e0e0e0;            /* Ak */
+    alt-bg: #1a1a1a;        
+    
+    selected-bg: #d23d50;   /* Kızıl */
+    selected-fg: #d6a259;   /* Your selected text is now golden yellow! */
+    
+    border-col: #d23d50;    /* Kızıl */
+    separator-col: #d6a259; /* Golden yellow dotted line */
+    
+    urgent-bg: #cade25;     /* Sarı */
+    active-bg: #368e5c;     /* Yeşil */
+
+    background-color: @bg;
+    text-color: @fg;
+}
+
+window {
+    background-color: @bg;
+    border-color: @border-col;
+}
+
+mainbox {
+    background-color: @bg;
+}
+
+inputbar {
+    background-color: @bg;
+    text-color: @fg;
+}
+
+prompt {
+    background-color: @bg;
+    text-color: @separator-col; 
+}
+
+entry {
+    background-color: @bg;
+    text-color: @fg;
+    placeholder: "Filtrelemek için yazın"; 
+    placeholder-color: #7a756f; 
+}
+
+num-filtered-rows, textbox-num-sep, num-rows {
+    text-color: #7a756f; 
+}
+
+case-indicator {
+    background-color: @bg;
+    text-color: @fg;
+}
+
+listview {
+    background-color: @bg;
+    border-color: @separator-col; 
+}
+
+scrollbar {
+    background-color: @bg;
+    handle-color: @border-col;
+}
+
+message {
+    background-color: @bg;
+    border-color: @separator-col;
+}
+textbox {
+    background-color: @bg;
+    text-color: @fg;
+}
+
+/* --- THE LIST ITEMS --- */
+
+element normal.normal {
+    background-color: @bg;
+    text-color: @fg;
+}
+element alternate.normal {
+    background-color: @alt-bg;
+    text-color: @fg;
+}
+element selected.normal {
+    background-color: @selected-bg;
+    text-color: @selected-fg;
+}
+
+element normal.active {
+    background-color: @active-bg;
+    text-color: @bg;
+}
+element alternate.active {
+    background-color: @active-bg;
+    text-color: @bg;
+}
+element selected.active {
+    background-color: @selected-bg;
+    text-color: @selected-fg;
+}
+
+element normal.urgent {
+    background-color: @urgent-bg;
+    text-color: @bg;
+}
+element alternate.urgent {
+    background-color: @urgent-bg;
+    text-color: @bg;
+}
+element selected.urgent {
+    background-color: @selected-bg;
+    text-color: @selected-fg;
+}

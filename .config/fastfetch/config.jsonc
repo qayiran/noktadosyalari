@@ -1,0 +1,45 @@
+    {
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "logo": {
+    "color": {
+      "1": "38;2;173;43;55", 
+      "2": "38;2;173;43;55"
+    }
+  },
+  "display": {
+    "color": {
+      "title": "38;2;173;43;55",
+      "keys": "38;2;173;43;55"
+    }
+  },
+  "modules": [
+    "title",
+    "separator",
+    { "type": "os", "key": "İşletim Sistemi" },
+    {
+    "type": "command",
+    "key": "Sistëm Yaşı",
+    "text": "echo $(( ($(date +%s) - $(date -d $(head -n1 /var/log/pacman.log | cut -d ' ' -f 1 | tr -d '[]') +%s)) / 86400 )) gün"
+    },
+    { "type": "host", "key": "Cihaz" },
+    { "type": "kernel", "key": "Çekirdek" },
+    { "type": "packages", "key": "Paketlër" },
+    { "type": "shell", "key": "Kabuk" },
+    { "type": "display", "key": "Ekran" },
+    { "type": "de", "key": "Masaüstü Ortamı" },
+    { "type": "wm", "key": "Pencere Yöneticisi" },
+    { "type": "wmtheme", "key": "Pencere Teması" },
+    { "type": "cursor", "key": "İmleç" },
+    { "type": "terminal", "key": "Uç Birim" },
+    { "type": "terminalfont", "key": "Uç Birim Yazı Tipi" },
+    { "type": "cpu", "key": "İşlëmci" },
+    { "type": "gpu", "key": "Grafik İşlëmci" },
+    { "type": "memory", "key": "Bëllek" },
+    { "type": "swap", "key": "Takas Alanı" },
+    { "type": "disk", "key": "Disk ({1})" },
+    { "type": "poweradapter", "key": "Güç Adaptörü" },
+    { "type": "locale", "key": "Dil" },
+    "break",
+    "colors"
+  ]
+}

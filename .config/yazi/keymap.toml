@@ -1,0 +1,9 @@
+[[mgr.prepend_keymap]]
+on   = [ "<C-y>" ]
+run  = [ "shell 'for path in \"$@\"; do echo \"file://$path\"; done | wl-copy -t text/uri-list' --confirm", "yank" ]
+desc = "Copy to Wayland clipboard"
+
+[[mgr.prepend_keymap]]
+on   = [ "<C-t>" ]
+run  = "shell 'setsid -f foot' --orphan"
+desc = "Open completely detached foot terminal"

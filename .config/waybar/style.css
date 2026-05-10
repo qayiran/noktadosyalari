@@ -1,0 +1,422 @@
+* {
+    /* Use the nerd font first, then the emoji font, then fallbacks */
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", "Noto Color Emoji", sans-serif;
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0);
+    border-bottom: 3px solid rgba (0, 0, 0, 0);
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: #FFFFFF;
+}
+*/
+
+window#waybar.termite {
+    background-color: #3F3F3F;
+}
+
+window#waybar.chromium {
+    background-color: #000000;
+    border: none;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+/* you can set a style on hover for any module like this */
+#pulseaudio:hover {
+    background-color: rgba(0,0,0,0);
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.focused {
+    background-color: #64727D;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#mode {
+    background-color: #64727D;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#custom-headset,
+#custom-cpu-temp,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#mpd {
+    padding: 0 9px;
+    margin: 0 0px;
+    color: #ffffff;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#clock {
+    background-color: rgba(0, 0, 0, 0);
+    color: #9F334D;
+}
+
+#battery {
+    background-color: rgba(0, 0, 0, 0);
+    color: #364F78;
+    text-shadow:
+    	0 0 2px #000,
+    	0 0 2px #000,
+    	0 0 2px #000;
+}
+
+#battery.charging, #battery.plugged {
+    color: #364F78;
+    background-color: rgba(0, 0, 0, 0);
+    text-shadow:
+    	0 0 2px #000,
+    	0 0 2px #000,
+    	0 0 2px #000
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#power-profiles-daemon {
+    padding-right: 15px;
+}
+
+#power-profiles-daemon.performance {
+    background-color: #f53c3c;
+    color: #ffffff;
+}
+
+#power-profiles-daemon.balanced {
+    background-color: #2980b9;
+    color: #ffffff;
+}
+
+#power-profiles-daemon.power-saver {
+    background-color: #2ecc71;
+    color: #000000;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#cpu {
+    background-color: #2ecc71;
+    color: #000000;
+}
+
+#memory {
+    background-color: #9b59b6;
+}
+
+#disk {
+    background-color: #964B00;
+}
+
+#backlight {
+    background-color: #90b1b1;
+}
+
+#network {
+    background-color: rgba(0, 0, 0, 0);
+    color: #368E5C;
+}
+
+#network.disconnected {
+    background-color: #f53c3c;
+    /* text-shadow:
+        0 0 2px #000,
+        0 0 2px #000,
+        0 0 2px #000; */
+}
+
+#pulseaudio {
+    background-color: rgba(0, 0, 0, 0);
+    color: #CADE25;
+    text-shadow: 
+        0 0 2px #000, 
+        0 0 2px #000, 
+        0 0 2px #000;
+}
+
+#custom-cpu-temp {
+    background-color: rgba(0, 0, 0, 0);
+    color: #FB6123;
+    text-shadow:
+        0 0 2px #000,
+        0 0 2px #000,
+        0 0 2px #000;
+}
+
+#temperature.critical {
+    color: #f38ba8; /* Hot red! */
+    border-bottom: 2px solid #f38ba8;
+    background: #313244;
+}
+
+#pulseaudio.muted {
+    background-color: rgba(0, 0, 0, 0);
+    color: #CADE25;
+    text-shadow:
+        0 0 2px #000,
+        0 0 2px #000,
+        0 0 2px #000;
+}
+
+#wireplumber {
+    background-color: #fff0f5;
+    color: #000000;
+}
+
+#wireplumber.muted {
+    background-color: #f53c3c;
+}
+
+#custom-media {
+    background-color: #66cc99;
+    color: #2a5c45;
+    min-width: 100px;
+}
+
+#custom-media.custom-spotify {
+    background-color: #66cc99;
+}
+
+#custom-media.custom-vlc {
+    background-color: #ffa000;
+}
+
+#tray {
+    background-color: #2980b9;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+
+#idle_inhibitor {
+    background-color: #2d3436;
+}
+
+#idle_inhibitor.activated {
+    background-color: #ecf0f1;
+    color: #2d3436;
+}
+
+#mpd {
+    background-color: #66cc99;
+    color: #2a5c45;
+}
+
+#mpd.disconnected {
+    background-color: #f53c3c;
+}
+
+#mpd.stopped {
+    background-color: #90b1b1;
+}
+
+#mpd.paused {
+    background-color: #51a37a;
+}
+
+#language {
+    background: #00b093;
+    color: #740864;
+    padding: 0 5px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state {
+    background: #97e1ad;
+    color: #000000;
+    padding: 0 0px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state > label {
+    padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad.empty {
+	background-color: transparent;
+}
+
+#privacy {
+    padding: 0;
+}
+
+#privacy-item {
+    padding: 0 5px;
+    color: white;
+}
+
+#privacy-item.screenshare {
+    background-color: #cf5700;
+}
+
+#privacy-item.audio-in {
+    background-color: #1ca000;
+}
+
+#privacy-item.audio-out {
+    background-color: #0069d4;
+}
+
+/* Styling for the Headset Module */
+#custom-headset {
+    background: rgba(0,0,0,0);
+    color: #FCA520;
+    text-shadow:
+        0 0 2px #000,
+        0 0 2px #000,
+        0 0 2px #000;
+}
+
+/* Optional: Make it turn red when battery is low */
+#custom-headset.low {
+    color: #FFEDA3;
+    text-shadow:
+        0 0 2px #000,
+        0 0 2px #000,
+        0 0 2px #000;
+}
+
+/* The Dots Configuration */
+#custom-vivaldi, 
+#custom-steam, 
+#custom-telegram, 
+#custom-discord,
+#custom-apple-music {
+    font-size: 20px;
+    padding: 0 10px;
+    margin: 0 2px;
+    background-color: transparent;
+}
+
+/* Vivaldi - Red */
+#custom-vivaldi {
+    color: #ff5555;
+}
+
+/* Steam - Light Blue (YOU FORGOT THIS! BAKA!) */
+#custom-steam {
+    color: #004e9a;
+}
+
+/* Telegram - Dark Blue (I removed the duplicate for you) */
+#custom-telegram {
+    color: #66c0f4;
+}
+
+/* Discord - Indigo */
+#custom-discord {
+    color: #5865F2;
+}
+#custom-apple-music {
+    color: #ffffff;
+}
+
+/* Hover Effect - Added Steam here too so it actually glows! */
+#custom-vivaldi:hover, 
+#custom-steam:hover, 
+#custom-telegram:hover, 
+#custom-discord:hover {
+    color: #ffffff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}

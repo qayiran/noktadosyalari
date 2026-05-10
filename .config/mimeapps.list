@@ -1,0 +1,20 @@
+
+[Default Applications]
+x-scheme-handler/magnet=deluge.desktop
+inode/directory=yazi.desktop
+text/html=vivaldi-stable.desktop
+x-scheme-handler/http=vivaldi-stable.desktop
+x-scheme-handler/https=vivaldi-stable.desktop
+x-scheme-handler/about=vivaldi-stable.desktop
+x-scheme-handler/unknown=vivaldi-stable.desktop
+image/x-farbfeld image/tiff image/tiff-fx image/png image/x-png image/jpeg image/jpg image/pjpeg image/svg+xml image/gif image/bmp image/x-bmp image/heif image/avif image/jxl image/webp image/qoi=imv.desktop
+image/jpeg=imv.desktop
+image/png=imv.desktop
+image/gif=imv.desktop
+image/svg+xml=imv.desktop
+image/webp=imv.desktop
+x-scheme-handler/discord-1216669957799018608=discord-1216669957799018608.desktop
+application/pdf=vivaldi-stable.desktop
+x-scheme-handler/discord=vesktop.desktop
+application/zip=yazi.desktop
+x-scheme-handler/discord-831593107883032657=discord-831593107883032657.desktop

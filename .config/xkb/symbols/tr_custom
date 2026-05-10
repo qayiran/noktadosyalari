@@ -1,0 +1,19 @@
+default partial alphanumeric_keys
+xkb_symbols "basic" {
+    // Include standard Turkish layout
+    include "tr(basic)"
+    // Enable AltGr (Right Alt) functionality
+    include "level3(ralt_switch)"
+
+    // Your 'E' key (AltGr+e = ë)
+    key <AD03> { [ e, E, ediaeresis, Ediaeresis ] };
+
+    // The Top-Left key
+    // Level 1: " (quotedbl)
+    // Level 2: é (eacute)
+    // Level 3: ’ (Apostrophe via AltGr)
+    key <TLDE> { [ quotedbl, eacute, rightsinglequotemark, NoSymbol ] };
+
+    // Your 'S' key (AltGr+s = š, AltGr+Shift+s = Š)
+    key <AC02> { [ s, S, scaron, Scaron ] };
+};
