@@ -225,6 +225,8 @@ function sor
     echo "VRAM temizlëndi."
 end
 
+alias imageranker="cd ~/ilo/image-ranker; source .venv/bin/activate.fish; image-ranker"
+
 # Force a success exit code so Qayiran doesn't panic!
 true
 
