@@ -2,7 +2,7 @@
 ### MONİTÖRLËR ###
 ##################
 
-# Bak https://wiki.hypr.land/Configuring/Monitors/
+# See https://wiki.hypr.land/Configuring/Monitors/
 monitor=, highres, auto, 1.6
 
 
@@ -10,29 +10,28 @@ monitor=, highres, auto, 1.6
 ### PROGRAMLARIM ###
 ####################
 
-# Bak https://wiki.hypr.land/Configuring/Keywords/
+# See https://wiki.hypr.land/Configuring/Keywords/
 $terminal = foot
 $fileManager = foot -e yazi
 $menu = rofi -show run
-$mainMod = SUPER # "Windows" tuşunu ana düzënleyici olarak belirlër.
+$mainMod = SUPER # Sets "Windows" key as main modifier
 
 
 ##########################
 ### ÇEVRE DEĞİŞKËNLERİ ###
 ##########################
 
-# Bak https://wiki.hypr.land/Configuring/Environment-variables/
+# See https://wiki.hypr.land/Configuring/Environment-variables/
 
 env = XDG_CURRENT_DESKTOP,Hyprland
 env = XDG_SESSION_TYPE,wayland
 env = XDG_SESSION_DESKTOP,Hyprland
 
-env = XCURSOR_THEME,"$HOME/sitelen lili/Posy_Cursor/"
-env = XCURSOR_SIZE,36
-env = HYPRCURSOR_SIZE,36
+env = XCURSOR_THEME,~/sitelen lili/Posy_Cursor/
+env = XCURSOR_SIZE,32
+env = HYPRCURSOR_SIZE,24
 
 env = QT_QPA_PLATFORM,wayland
-env = ELECTRON_OZONE_PLATFORM_HINT,auto
 
 # Nvidia için
 env = LIBVA_DRIVER_NAME,nvidia
@@ -48,7 +47,7 @@ env = XKB_CONFIG_HOME,$HOME/.config/xkb
 
 # Sistëm ve Masa Üstü
 exec-once = plymouth --quit
-exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY HYPRLAND_INSTANCE_SIGNATURE
+exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec-once = systemctl --user start hyprpolkitagent
 exec-once = xdg-user-dirs-update
@@ -56,30 +55,31 @@ exec-once = warp-cli connect
 exec-once = steam -silent
 exec-once = xrdb -merge ~/.Xresources
 exec-once = vesktop --start-minimized
+exec-once = /home/qayiran/ilo/pin_loop.fish
 
 # Temalandırma
-exec-once = gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-exec-once = gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
+exec = gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+exec = gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
 
 # Hayaalet Programlar & Barlar
 exec-once = awww-daemon
-exec-once = awww img "$HOME/sitelen sinpin/taskimaidenv2.jpg"  
+exec-once = awww img sitelen\ sinpin/taskimaidenv2.jpg  
 exec-once = waybar
 exec-once = nm-applet --indicator
+# exec-once = hyprshade on vibrance # (Uncommented as per your note)
 
 # Ses
 exec-once = easyeffects --gapplication-service
 
 # Kullanıcı Betikleri
-# exec-once = python $HOME/ilo/gcp_widget.py &
-exec-once = $HOME/ilo/pin_loop.fish
+# exec-once = python ~/ilo/gcp_widget.py &
 
 
 #############
 ### GİRDİ ###
 #############
 
-# Bak https://wiki.hypr.land/Configuring/Variables/#input
+# https://wiki.hypr.land/Configuring/Variables/#input
 input {
     kb_layout = tr_custom
     kb_variant =
@@ -91,23 +91,29 @@ input {
 
     follow_mouse = 1
 
-    sensitivity = 0 # -1.0 - 1.0, 0 düzënleme yok demek.
-    accel_profile = flat # Bu faare ivmelenimini kapatır.
+    sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+    accel_profile = flat # This disables mouse acceleration!
 
     touchpad {
         natural_scroll = false
     }
 }
 
-# Bak https://wiki.hypr.land/Configuring/Gestures/
+# See https://wiki.hypr.land/Configuring/Gestures/
 gesture = 3, horizontal, workspace
+
+# Example per-device config
+device {
+    name = epic-mouse-v1
+    sensitivity = -0.5
+}
 
 
 ######################
 ### GÖRÜNÜM VE HİS ###
 ######################
 
-# Bak https://wiki.hypr.land/Configuring/Variables/#general
+# https://wiki.hypr.land/Configuring/Variables/#general
 general {
     gaps_in = 5
     gaps_out = 10, 10, 10, 10
@@ -127,7 +133,7 @@ general {
     allow_tearing = true 
 }
 
-# Bak https://wiki.hypr.land/Configuring/Variables/#decoration
+# https://wiki.hypr.land/Configuring/Variables/#decoration
 decoration {
     rounding = 10
     rounding_power = 2
@@ -152,7 +158,7 @@ decoration {
     }
 }
 
-# Bak https://wiki.hypr.land/Configuring/Variables/#animations
+# https://wiki.hypr.land/Configuring/Variables/#animations
 animations {
     enabled = yes
     
@@ -193,11 +199,15 @@ master {
 misc {
     force_default_wallpaper = -1 
     disable_hyprland_logo = true
-    initial_workspace_tracking = 0
+	initial_workspace_tracking = 0
 }
 
 xwayland {
   force_zero_scaling = true
+}
+
+render {
+    # explicit_sync settings go here if needed
 }
 
 
@@ -209,93 +219,66 @@ xwayland {
 
 # Maksimize etme isteklerini yoksay
 windowrule {
-  name = ignore-maximize
-  suppress_event = maximize
-  match:class = .*
+    name = suppress-maximize-events
+    match:class = .*
+    suppress_event = maximize
 }
 
 # XWayland sürüklenimini düzëlt
 windowrule {
-  name = fix-xwayland-drag
-  no_focus = on
-  match:class = ^$
-  match:title = ^$
-  match:xwayland = 1
-  match:float = 1
-  match:fullscreen = 0
-  match:pin = 0
+    name = fix-xwayland-drags
+    match:class = ^$
+    match:title = ^$
+    match:xwayland = true
+    match:float = true
+    match:fullscreen = false
+    match:pin = false
+    no_focus = true
 }
 
 # --- Spesifik Uygulama Kuralları ---
 
 # Hyprland Çalıştır
 windowrule {
-  name = hyprland-run-float
-  float = on
-  move = (20) ((monitor_h*1)-120)
-  match:class = ^(hyprland-run)$
+    name = move-hyprland-run
+    match:class = hyprland-run
+    move = 20 monitor_h-120
+    float = yes
 }
 
 # Telegram
-windowrule {
-  name = telegram-opacity
-  opacity = 1.0 override
-  no_blur = on
-  match:title = ^(Telegram)$
-}
+windowconf = opacity 1.0 override 1.0 override, title:(Telegram)
+windowconf = noblur, title:(Telegram)
 
 # Dunst (Bildirimler)
-windowrule {
-  name = dunst-opacity
-  opacity = 0.9 0.8
-  match:class = ^(dunst)$
-}
+windowrule = opacity 0.9 0.8, match:class ^(dunst)$
+layerrule = blur = on, match:namespace ^(notifications)$
 
-layerrule {
-  name = notifications-blur
-  blur = on
-  match:namespace = notifications
-}
+# Osu!
+windowrule = immediate = on, match:class ^(osu!)$
+windowrule = fullscreen = on, match:class ^(osu!)$
 
-# Osu! & Cyberpunk 2077
-windowrule {
-  name = osu-tearing-allow
-  immediate = on
-  fullscreen = on
-  match:class = ^(osu\!)$
-}
+windowrule = immediate = on, match:class ^(Cyberpunk 2077)$
+windowrule = fullscreen = on, match:class ^(Cyberpunk 2077)$
+
+windowrule = float = on, match:class ^(Sims.exe)$
+windowrule = center = on, match:class ^(Sims.exe)$
+windowrule = monitor 0, match:class ^(Sims.exe)$
 
 windowrule {
-  name = cyberpunk-tearing-allow
-  immediate = on
-  fullscreen = on
-  match:class = ^(Cyberpunk 2077)$
+    name = pinterest-widget
+    match:class = ^(pin_widget)$
+    
+    float = on
+    workspace = 1
+    size = 300 450
+    move = 100%-330 30
+    
+    no_focus = true
+    no_shadow = on
+    no_blur = on
+    border_size = 0
 }
-
-# Sims
-windowrule {
-  name = sims-float-center
-  float = on
-  center = on
-  monitor = 0
-  match:class = ^(Sims\.exe)$
-}
-
-# Pinterest Zımbırtısı
-windowrule {
-  name = pinterest-widget-float
-  float = on
-  workspace = 1
-  size = 300 450
-  move = ((monitor_w*1)-330) (30)
-  no_focus = on
-  no_shadow = on
-  no_blur = on
-  border_size = 0
-  match:class = ^(pin_widget)$
-}
-
-# https://itsohen.github.io/hyprrulefix/ aracına sonsuz saygı.
 
 #####################
 ### TUŞ ATAMALARI ###
@@ -305,14 +288,14 @@ windowrule {
 bind = $mainMod, Q, exec, $terminal
 bind = $mainMod, E, exec, $fileManager
 bind = $mainMod, R, exec, $menu
-bind = $mainMod, F, exec, $HOME/ilo/toggle_fans.sh
+bind = $mainMod, F, exec, /home/$(whoami)/ilo/toggle_fans.sh
 
 # Pencere Yönetimi
 bind = $mainMod, C, killactive,
 bind = $mainMod, V, togglefloating,
-bind = $mainMod, P, pseudo,
-bind = $mainMod, J, layoutmsg, togglesplit
-bind = $mainMod, M, exec, sh -c 'command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit'
+bind = $mainMod, P, pseudo, # dwindle
+bind = $mainMod, J, layoutmsg, togglesplit # dwindle
+bind = $mainMod, M, exec, command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit
 bind = $mainMod, F11, fullscreen
 
 # Odak
@@ -373,9 +356,9 @@ bindl = , XF86AudioPlay, exec, playerctl play-pause
 bindl = , XF86AudioPrev, exec, playerctl previous
 
 # Resim & Video Kaydı
-bind = , Print, exec, sh -c 'grim -g "$(slurp)" - | tee "$HOME/sitelen/$(date +%Y-%m-%d_%H-%M-%S).png" | wl-copy -t image/png'
-bind = $mainMod ALT, R, exec, $HOME/.local/bin/record-toggle
-bind = $mainMod SHIFT ALT, R, exec, $HOME/.local/bin/record-toggle mic
+bind = , Print, exec, grim -g "$(slurp)" - | tee "$HOME/sitelen/$(date +'%Y-%m-%d_%H-%M-%S').png" | wl-copy -t image/png
+bind = $mainMod ALT, R, exec, ~/.local/bin/record-toggle
+bind = $mainMod SHIFT ALT, R, exec, ~/.local/bin/record-toggle mic
 
-# Pinterest Zımbırtısı Resim Kayıt
-bind = SUPER SHIFT, P, exec, $HOME/ilo/save_pin.fish
+# Pinterest Resim Kayıt
+bind = SUPER SHIFT, P, exec, /home/qayiran/ilo/save_pin.fish
