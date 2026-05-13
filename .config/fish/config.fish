@@ -197,6 +197,8 @@ alias tetris='retroarch -L /usr/lib/libretro/nestopia_libretro.so "qayiran/ijo/S
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+alias nemo='cd qayiran/ijo/YZ/; ./start_ai.sh'
+
 function sor
     echo "Mistral-Nemo yükleniyor..."
     
