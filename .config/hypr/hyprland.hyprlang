@@ -52,7 +52,6 @@ exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CUR
 exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec-once = systemctl --user start hyprpolkitagent
 exec-once = xdg-user-dirs-update
-exec-once = warp-cli connect
 exec-once = steam -silent
 exec-once = xrdb -merge ~/.Xresources
 exec-once = vesktop --start-minimized
@@ -61,7 +60,7 @@ exec-once = vesktop --start-minimized
 exec-once = gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 exec-once = gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
 
-# Hayaalet Programlar & Barlar
+# Hayaalet Programlar ve Barlar
 exec-once = awww-daemon
 exec-once = awww img "$HOME/sitelen sinpin/taskimaidenv2.jpg"  
 exec-once = waybar
@@ -244,7 +243,7 @@ windowrule {
   match:title = ^(Telegram)$
 }
 
-# Dunst (Bildirimler)
+# Dunst (Bildirimlër)
 windowrule {
   name = dunst-opacity
   opacity = 0.9 0.8

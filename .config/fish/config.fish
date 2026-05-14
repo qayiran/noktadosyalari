@@ -229,6 +229,14 @@ end
 
 alias imageranker="cd ~/ilo/image-ranker; source .venv/bin/activate.fish; image-ranker"
 
+function dgif
+    yt-dlp "$argv[1]" --exec "ffmpeg -i {} -vf 'fps=10,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse' {}.gif && rm {}"
+end
+
+function ytdvideo
+    yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" --merge-output-format mp4 "$argv[1]"
+end
+
 # Force a success exit code so Qayiran doesn't panic!
 true
 
