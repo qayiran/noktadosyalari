@@ -237,6 +237,8 @@ function ytdvideo
     yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" --merge-output-format mp4 "$argv[1]"
 end
 
+alias :3="sudo"
+
 # Force a success exit code so Qayiran doesn't panic!
 true
 
