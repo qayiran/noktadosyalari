@@ -401,3 +401,12 @@ hl.window_rule({
     no_blur = true,
     border_size = 0,
 })
+
+-- Photoshop
+hl.window_rule({
+    name  = "photoshop-float-center",
+    match = { class = "^(steam_app_3042768914)$" },
+    float = true,
+    center = true,
+    monitor = 0,
+})
