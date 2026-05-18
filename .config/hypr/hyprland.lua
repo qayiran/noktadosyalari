@@ -233,6 +233,7 @@ hl.gesture({
 -----------------------
 
 local mainMod = "SUPER" -- "Windows" tuşunu ana düzënleyici olarak belirlër.
+local is_custom_floating = false
 
 -- Daha fazlası için https://wiki.hypr.land/Configuring/Basics/Binds/
 
@@ -245,9 +246,14 @@ hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("$HOME/ilo/toggle_fans.sh"))
 -- Pencere Yönetimi
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + V", function()
-    hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
-    hl.dispatch(hl.dsp.window.resize({ x = 1280, y = 720 }))
-    hl.dispatch(hl.dsp.window.center())
+    is_custom_floating = not is_custom_floating
+    if is_custom_floating then
+        hl.dispatch(hl.dsp.window.float({ action = "enable" }))
+        hl.dispatch(hl.dsp.window.resize({ x = 1280, y = 720 }))
+        hl.dispatch(hl.dsp.window.center())
+    else
+        hl.dispatch(hl.dsp.window.float({ action = "disable" }))
+    end
 end)
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
