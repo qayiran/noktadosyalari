@@ -11,6 +11,7 @@ hl.monitor({
     mode     = "highres",
     position = "auto",
     scale    = "1.6",
+    transform = 0,
 })
 
 

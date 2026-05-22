@@ -138,7 +138,7 @@ end
 
 alias up='paru && date +%s > ~/.config/fish/.last_update_check'
 
-alias comfy="cd ~/qayiran/ijo/ComfyUI; source venv/bin/activate.fish; python main.py"
+alias comfy="cd ~/qayiran/ijo/YZ/ComfyUI; source .venv/bin/activate.fish; python main.py"
 
 function waifu
     # 'nohup' prevents the app from dying if you eventually close the terminal
@@ -238,6 +238,9 @@ function ytdvideo
 end
 
 alias :3="sudo"
+
+alias atak="hyprshutdown -t 'Shutting down...' --post-cmd 'shutdown -P 0'"
+alias atgöy="hyprshutdown -t 'Restarting...' --post-cmd 'reboot'"
 
 # Force a success exit code so Qayiran doesn't panic!
 true

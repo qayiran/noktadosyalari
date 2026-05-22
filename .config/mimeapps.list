@@ -18,3 +18,5 @@ application/pdf=vivaldi-stable.desktop
 x-scheme-handler/discord=vesktop.desktop
 application/zip=yazi.desktop
 x-scheme-handler/discord-831593107883032657=discord-831593107883032657.desktop
+x-scheme-handler/flashpoint=flashpoint-launcher.desktop
+x-scheme-handler/mailto=vivaldi-stable.desktop
