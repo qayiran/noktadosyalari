@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Folder setup
+OUT_DIR="$HOME/sitelen tawa"
+mkdir -p "$OUT_DIR"
+STATE_FILE="/tmp/gsr_mic_state.txt"
+
+# 1. STOP RECORDING IF ALREADY RUNNING
+if killall -0 gpu-screen-recorder 2>/dev/null; then
+    echo "Stopping the recording... Hold on, baka! 😤"
+    
+    # Send SIGINT to cleanly close the video file
+    killall -SIGINT gpu-screen-recorder
+    
+    # Wait for the process to finish saving
+    while killall -0 gpu-screen-recorder 2>/dev/null; do 
+        sleep 0.5 
+    done
+    
+    # POST-PROCESSING: Merge the audio tracks if we have a state file!
+    if [ -f "$STATE_FILE" ]; then
+        RAW_FILE=$(cat "$STATE_FILE")
+        FINAL_FILE="${RAW_FILE/_RAW/}"
+        
+        echo "Merging desktop and mic audio... Don't you dare close this!"
+        
+        # FFmpeg magic: Mixes Track 1 and Track 2 into a single stereo track
+        ffmpeg -y -i "$RAW_FILE" \
+        -filter_complex "[0:a:1]pan=stereo|c0=FL|c1=FL[mic];[0:a:0][mic]amix=inputs=2:normalize=0[aout]" \
+        -map 0:v -map "[aout]" -c:v copy -c:a aac -b:a 256k "$FINAL_FILE" < /dev/null -hide_banner -loglevel error
+        
+        # Clean up temporary files
+        rm "$RAW_FILE" "$STATE_FILE"
+        echo "Done! Merged video saved to $FINAL_FILE! 💖"
+    fi
+    
+    exit 0
+fi
+
+# 2. START RECORDING
+TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
+RAW_OUT="$OUT_DIR/ST_DEFAULT_RAW_$TIMESTAMP.mp4"
+echo "$RAW_OUT" > "$STATE_FILE"
+
+echo "Figuring out your setup... Stop rushing me!"
+
+# Dynamically fetch the default output and input
+DESKTOP_AUDIO="$(pactl get-default-sink).monitor"
+MIC_AUDIO="$(pactl get-default-source)"
+
+# Instantly find the active monitor in Hyprland!
+MONITOR=$(hyprctl monitors | awk '/Monitor/ {mon=$2} /focused: yes/ {print mon}')
+
+echo "Starting Ultra recording instantly on $MONITOR... Speak clearly!"
+
+# Launch the recorder in the background!
+# -f 60 sets FPS, -q ultra sets the quality preset
+gpu-screen-recorder -w "$MONITOR" -f 60 -q ultra \
+    -a "$DESKTOP_AUDIO" \
+    -a "$MIC_AUDIO" \
+    -o "$RAW_OUT" &

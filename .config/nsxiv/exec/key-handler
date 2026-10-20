@@ -1,0 +1,15 @@
+#!/bin/sh
+
+while read -r file; do
+    case "$1" in
+        "c")
+            # Copies the actual image data to your clipboard
+            mime_type=$(file -b --mime-type "$file")
+            wl-copy -t "$mime_type" < "$file"
+            ;;
+        "p")
+            # Copies just the text path of the file
+            echo -n "$file" | wl-copy
+            ;;
+    esac
+done

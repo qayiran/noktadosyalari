@@ -1,0 +1,131 @@
+#!/usr/bin/env fish
+
+# ---- DOTFILES YEDËKLEME BETİĞİ (SYNC-DOTS) ----
+set dotgit /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME
+set sys_backup $HOME/.config/system-backup
+
+echo "Checking and mirroring your Arch config files... 🙄"
+
+# ---- 1. SİSTËM VE ÖNYÜKLEME (BOOT/ETC) YEDËĞİ ----
+mkdir -p $sys_backup/boot/loader/entries \
+         $sys_backup/etc/keyd \
+         $sys_backup/etc/modprobe.d \
+         $sys_backup/etc/sysctl.d \
+         $sys_backup/etc/udev/rules.d \
+         $sys_backup/etc/X11/xorg.conf.d \
+         $sys_backup/etc/systemd/system/systemd-user-sessions.service.d \
+         $sys_backup/etc/systemd/system/plexmediaserver.service.d \
+         $sys_backup/etc/systemd/system/ollama.service.d
+
+set sys_files \
+    /boot/loader/loader.conf \
+    /boot/loader/entries/arch.conf \
+    /etc/fstab \
+    /etc/mkinitcpio.conf \
+    /etc/pacman.conf \
+    /etc/makepkg.conf \
+    /etc/nftables.conf \
+    /etc/locale.conf \
+    /etc/vconsole.conf \
+    /etc/hosts \
+    /etc/keyd/default.conf \
+    /etc/X11/xorg.conf.d/00-keyboard.conf \
+    /etc/systemd/system/numlock.service \
+    /etc/systemd/system/systemd-user-sessions.service.d/no-network-wait.conf \
+    /etc/systemd/system/plexmediaserver.service.d/override.conf \
+    /etc/systemd/system/ollama.service.d/override.conf
+
+for f in $sys_files /etc/modprobe.d/*.conf /etc/sysctl.d/*.conf /etc/udev/rules.d/*.rules
+    if test -r "$f"
+        cp -f "$f" "$sys_backup$f"
+    end
+end
+
+# Kurulu paket listelërini kaydet (Resmi depo + AUR)
+pacman -Qqen | grep -vE '^(zapret|byedpi)' > $sys_backup/pkglist-repo.txt
+pacman -Qqem | grep -vE '^(zapret|byedpi)' > $sys_backup/pkglist-aur.txt
+
+# ---- 2. GÜVËNLİ KLASÖRLËR ----
+set safe_folders \
+    .github \
+    .config/aichat \
+    .config/autostart \
+    .config/btop \
+    .config/dunst \
+    .config/easyeffects \
+    .config/fastfetch \
+    .config/fish \
+    .config/fontconfig \
+    .config/foot \
+    .config/gtk-3.0 \
+    .config/gtk-4.0 \
+    .config/hypr \
+    .config/MangoHud \
+    .config/micro \
+    .config/mpv \
+    .config/nsxiv \
+    .config/pipewire \
+    .config/rofi \
+    .config/system-backup \
+    .config/systemd \
+    .config/waybar \
+    .config/xdg-desktop-portal \
+    .config/xkb \
+    .config/xsettingsd \
+    .config/yazi
+
+echo "Scanning safe folders for new files..."
+for folder in $safe_folders
+    if test -d $HOME/$folder
+        $dotgit add $HOME/$folder
+    end
+end
+
+# ---- 3. TEKİL DOSYALAR VE MASAÜSTÜ BETİKLËRİ (ILO) ----
+set safe_files \
+    $HOME/.gitignore \
+    $HOME/.Xresources \
+    $HOME/ilo/sync-dots \
+    $HOME/ilo/record-toggle \
+    $HOME/ilo/toggle_fans.sh \
+    $HOME/ilo/vivaldi-fix.sh \
+    $HOME/ilo/pin_loop.fish \
+    $HOME/ilo/save_pin.fish \
+    $HOME/ilo/pinterest_scraper.py \
+    $HOME/ilo/true_widget.py \
+    $HOME/ilo/sleep_monitor.fish \
+    $HOME/ilo/gcp_widget.py \
+    $HOME/ilo/hardware-fetch.fish \
+    $HOME/ilo/kernel_check.sh \
+    $HOME/ilo/update-rofi-wifi.sh \
+    $HOME/ilo/ay/ay.py
+
+for file in $safe_files
+    if test -f "$file"
+        $dotgit add "$file"
+    end
+end
+
+echo "Staging updates and deletions for everything else..."
+$dotgit add -u
+
+set changes ($dotgit status --porcelain)
+set unpushed ($dotgit log origin/main..main --oneline 2>/dev/null)
+
+if test -z "$changes"; and test -z "$unpushed"
+    echo "Hmph! Everything is already up to date and safely on GitHub, dummy!"
+    exit 0
+end
+
+if test -n "$changes"
+    set commit_msg "Otomatik güncëlleme: "(date +"%d.%m.%Y %H:%M:%S")
+    echo "Committing with message: '$commit_msg'"
+    $dotgit commit -m "$commit_msg"
+else
+    echo "No new edits, but I see left-over commits waiting to push! 😤"
+end
+
+echo "Pushing to GitHub..."
+$dotgit push origin main
+
+echo "Done! Your Arch setup is safe. Y-you're welcome! 🌸"

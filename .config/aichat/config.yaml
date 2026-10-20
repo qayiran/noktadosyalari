@@ -1,0 +1,9 @@
+clients:
+  - type: openai
+    name: local
+    api_base: http://127.0.0.1:5000/v1
+    api_key: sk-11111111111111111111111111111111
+    models:
+      - name: Mistral-Nemo-Instruct-2407-Q5_K_M
+
+model: local:Mistral-Nemo-Instruct-2407-Q5_K_M
