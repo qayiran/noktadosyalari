@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Vesktop
+Comment=Vesktop autostart script
+Exec=/usr/lib/electron40/electron /usr/lib/vesktop/app.asar "env ELECTRON_OZONE_PLATFORM_HINT=auto" --start-minimized
+StartupNotify=false
+Terminal=false
+Icon=vesktop

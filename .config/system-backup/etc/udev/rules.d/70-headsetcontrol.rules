@@ -1,0 +1,2 @@
+# SteelSeries Headsets
+KERNEL=="hidraw*", ATTRS{idVendor}=="1038", MODE="0666"

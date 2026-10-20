@@ -1,0 +1,101 @@
+{
+    // ---- GENËL AYARLAR ----
+    "layer": "top",
+    "position": "top",
+    "exclusive": true,
+
+    "modules-left": [
+        "clock"
+    ],
+    "modules-center": [
+        "custom/vivaldi",
+        "custom/steam",
+        "custom/telegram",
+        "custom/discord",
+        "custom/apple-music"
+    ],
+    "modules-right": [
+        "custom/cpu-temp",
+        "custom/headset",
+        "pulseaudio",
+        "network",
+        "battery"
+    ],
+
+    // ---- SOL MODÜLLËR ----
+    "clock": {
+        "format": "{:%H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    // ---- ORTA MODÜLLËR (UYGULAMALAR) ----
+    "custom/vivaldi": {
+        "format": "●",
+        "on-click": "vivaldi-fix.sh",
+        "tooltip": false
+    },
+    "custom/steam": {
+        "format": "●",
+        "on-click": "steam",
+        "tooltip": false
+    },
+    "custom/telegram": {
+        "format": "●",
+        "on-click": "Telegram",
+        "tooltip": false
+    },
+    "custom/discord": {
+        "format": "●",
+        "on-click": "vesktop",
+        "tooltip": false
+    },
+    "custom/apple-music": {
+        "format": "●",
+        "on-click": "vivaldi-stable --profile-directory=Default --app-id=blgdilankhbcpipclgpdndahbehalgkh",
+        "tooltip": false
+    },
+
+    // ---- SAĞ MODÜLLËR (SİSTËM DURUMU) ----
+    "custom/cpu-temp": {
+        "exec": "cat /sys/devices/platform/msi-ec/cpu/realtime_temperature",
+        "critical-threshold": 80,
+        "interval": 2,
+        "format": " {text}°S",
+        "format-icons": ["", "", ""],
+        "tooltip": false
+    },
+    "custom/headset": {
+        "exec": "headsetcontrol -b -c",
+        "interval": 60,
+        "format": "  %{}",
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "  %{volume}",
+        "format-muted": " Sessiz",
+        "on-click": "pavucontrol",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "default": ["", "", ""]
+        }
+    },
+    "network": {
+        "format-wifi": "󰖩 {essid}",
+        "format-ethernet": "󰈀 {ifname}",
+        "format-disconnected": "󰖫 Bağlantı Yok",
+        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "tooltip-format-wifi": "{essid} ({signaldBm}dBm) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Bağlantı Kesildi",
+        "max-length": 50,
+        "on-click": "rofi -show wifi -iface wlp59s0f0"
+    },
+    "battery": {
+        "bat": "BAT1",
+        "interval": 10,
+        "format": "%{capacity}",
+        "format-charging": "󱐋 %{capacity}",
+        "format-plugged": " %{capacity}"
+    }
+}

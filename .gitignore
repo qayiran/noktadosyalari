@@ -1,0 +1,10 @@
+.config/micro/buffers/
+.config/micro/backups/
+.config/fish/.last_update_check
+.config/fish/functions/ocul.fish
+.config/fish/functions/ocul-dur.fish
+.config/fish/functions/moon.fish
+.gitconfig
+*.bak*
+*.backup
+*.old

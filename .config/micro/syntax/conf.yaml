@@ -1,0 +1,5 @@
+filetype: conf
+detect:
+    filename: "\\.conf$"
+rules:
+    - include: "shell"

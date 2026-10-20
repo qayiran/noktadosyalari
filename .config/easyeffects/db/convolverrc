@@ -1,0 +1,6 @@
+[soe][Convolver#0]
+autogain=false
+kernelName=DolbyAtmos
+
+[soe][Convolver#1]
+kernelName=DolbyAtmos

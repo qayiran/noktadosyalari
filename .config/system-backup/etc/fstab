@@ -1,0 +1,9 @@
+# /dev/nvme0n1p2 LABEL=bibbul
+UUID=47715d28-fc0e-4e95-a509-e262f2d17ed7	/         	ext4      	rw,noatime	0 1
+
+# /dev/nvme0n1p1 LABEL=SYSTEM
+UUID=9035-34D0      	/efi      	vfat      	rw,noatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro	0 2
+
+# /dev/nvme0n1p3 LABEL=XBOOTLDR
+UUID=4BBF-2A0B      	/boot     	vfat      	rw,noatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro	0 2
+
