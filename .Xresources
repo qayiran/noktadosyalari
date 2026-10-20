@@ -1,5 +1,6 @@
-Nsxiv.window.background: #1e1e2e
-Nsxiv.window.foreground: #cdd6f4
-Nsxiv.bar.background:    #1e1e2e
-Nsxiv.bar.foreground:    #cdd6f4
-Nsxiv.bar.font:          monospace:size=10
+! ---- NSXIV RENK PALETİ (KARA & KIZIL) ----
+Nsxiv.window.background: #050505
+Nsxiv.window.foreground: #e0e0e0
+Nsxiv.bar.background:    #1a1a1a
+Nsxiv.bar.foreground:    #d23d50
+Nsxiv.bar.font:          JetBrainsMono Nerd Font:size=10

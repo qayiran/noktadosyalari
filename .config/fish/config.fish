@@ -19,6 +19,8 @@ fish_add_path $HOME/.local/bin
 
 if status is-interactive
     set -g nvm_default_version lts
+    zoxide init fish | source
+    fzf --fish | source
 end
 
 

@@ -5,7 +5,8 @@
     "exclusive": true,
 
     "modules-left": [
-        "clock"
+        "clock",
+        "mpris"
     ],
     "modules-center": [
         "custom/vivaldi",
@@ -24,8 +25,19 @@
 
     // ---- SOL MODÜLLËR ----
     "clock": {
-        "format": "{:%H:%M}",
+        "interval": 1,
+        "format": "{:%H:%M:%S}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "mpris": {
+        "format": "{status_icon} {title}",
+        "format-paused": "{status_icon} <i>{title}</i>",
+        "tooltip-format": "{artist} — {title}",
+        "max-length": 45,
+        "status-icons": {
+            "playing": "󰎈",
+            "paused": "󰏤"
+        }
     },
 
     // ---- ORTA MODÜLLËR (UYGULAMALAR) ----

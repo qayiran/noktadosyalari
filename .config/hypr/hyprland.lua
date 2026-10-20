@@ -51,12 +51,15 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor-size 32")
     hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
     hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'")
+    hl.exec_cmd("gsettings set org.gnome.desktop.interface accent-color 'red'")
 
     -- Hayaalet Programlar ve Barlar
     hl.exec_cmd("awww-daemon")
     hl.exec_cmd('awww img "$HOME/sitelen sinpin/taskimaidenv2.jpg"')
     hl.exec_cmd("waybar")
     hl.exec_cmd("nm-applet --indicator")
+    hl.exec_cmd("hypridle")
+    hl.exec_cmd("wl-paste --watch cliphist store")
 
     -- Ses
     hl.exec_cmd("easyeffects --gapplication-service")
@@ -260,6 +263,7 @@ local is_custom_floating = false
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("sh -c 'cliphist list | rofi -dmenu -p \"pano\" | cliphist decode | wl-copy'"))
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("$HOME/ilo/toggle_fans.sh"))
 
 -- Pencere Yönetimi
@@ -276,6 +280,7 @@ hl.bind(mainMod .. " + V", function()
 end)
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + F11", hl.dsp.window.fullscreen())
 
@@ -310,9 +315,9 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 hl.bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume",  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
 hl.bind("XF86AudioMute",         hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
-hl.bind("XF86AudioMicMute",      hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true })
+hl.bind("XF86AudioMicMute",      hl.dsp.exec_cmd("$HOME/ilo/osd.fish mic-mute"),                    { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("$HOME/ilo/osd.fish bri-up"),                      { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("$HOME/ilo/osd.fish bri-down"),                    { locked = true, repeating = true })
 
 hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
@@ -380,6 +385,12 @@ hl.layer_rule({
     blur = true,
 })
 
+hl.layer_rule({
+    name  = "rofi-blur",
+    match = { namespace = "rofi" },
+    blur = true,
+})
+
 -- Osu! ve Cyberpunk 2077
 hl.window_rule({
     name  = "osu-tearing-allow",
@@ -425,4 +436,14 @@ hl.window_rule({
     float = true,
     center = true,
     monitor = 0,
+})
+
+-- Ses Karıştırıcısı (Pavucontrol / Pulsemixer)
+hl.window_rule({
+    name  = "audio-mixer-float",
+    match = { class = "^(org\\.pulseaudio\\.pavucontrol|pulsemixer)$" },
+    float = true,
+    size = "1050 620",
+    center = true,
+    opacity = "0.92 0.88",
 })

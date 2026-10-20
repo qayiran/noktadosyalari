@@ -1,0 +1,60 @@
+# ---- YAZI TEMA AYARLARI (KARA, KIZIL VE BOZ SARI) ----
+
+[mgr]
+cwd = { fg = "#d6a259", bold = true }
+
+# Seçili (Hovered) Öğe
+hovered         = { fg = "#d6a259", bg = "#d23d50", bold = true }
+preview_hovered = { underline = true }
+
+# Arama (Find)
+find_keyword  = { fg = "#cade25", bold = true, italic = true, underline = true }
+find_position = { fg = "#d23d50", bg = "reset", bold = true, italic = true }
+
+# İşaretleyicilër (Markers)
+marker_copied   = { fg = "#368e5c", bg = "#368e5c" }
+marker_cut      = { fg = "#d23d50", bg = "#d23d50" }
+marker_marked   = { fg = "#d6a259", bg = "#d6a259" }
+marker_selected = { fg = "#cade25", bg = "#cade25" }
+
+# Kenarlık
+border_symbol = "│"
+border_style  = { fg = "#d23d50" }
+
+[tabs]
+active   = { fg = "#d6a259", bg = "#d23d50", bold = true }
+inactive = { fg = "#e0e0e0", bg = "#1a1a1a" }
+
+[mode]
+normal_main = { fg = "#1a1a1a", bg = "#d23d50", bold = true }
+normal_alt  = { fg = "#d23d50", bg = "#1a1a1a" }
+select_main = { fg = "#1a1a1a", bg = "#d6a259", bold = true }
+select_alt  = { fg = "#d6a259", bg = "#1a1a1a" }
+unset_main  = { fg = "#1a1a1a", bg = "#368e5c", bold = true }
+unset_alt   = { fg = "#368e5c", bg = "#1a1a1a" }
+
+[status]
+perm_sep   = { fg = "#7a756f" }
+perm_type  = { fg = "#368e5c" }
+perm_read  = { fg = "#cade25" }
+perm_write = { fg = "#d23d50" }
+perm_exec  = { fg = "#2b5f5b" }
+
+progress_label  = { fg = "#e0e0e0", bold = true }
+progress_normal = { fg = "#d23d50", bg = "#1a1a1a" }
+progress_error  = { fg = "#cade25", bg = "#d23d50" }
+
+[pick]
+border   = { fg = "#d23d50" }
+active   = { fg = "#d6a259", bold = true }
+inactive = { fg = "#e0e0e0" }
+
+[input]
+border   = { fg = "#d23d50" }
+title    = { fg = "#d6a259" }
+value    = { fg = "#e0e0e0" }
+selected = { reversed = true }
+
+[confirm]
+border = { fg = "#d23d50" }
+title  = { fg = "#d6a259", bold = true }
