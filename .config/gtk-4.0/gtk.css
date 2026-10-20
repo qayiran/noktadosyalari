@@ -1,1 +1,88 @@
-/usr/share/themes/adw-gtk3-dark/gtk-4.0/gtk.css
+/* ---- GTK-4.0 KARA & KIZIL TEMA ---- */
+@define-color accent_bg_color #d23d50;
+@define-color accent_fg_color #e0e0e0;
+@define-color accent_color #d23d50;
+
+@define-color window_bg_color #0a0a0a;
+@define-color window_fg_color #e0e0e0;
+@define-color view_bg_color #121212;
+@define-color view_fg_color #e0e0e0;
+@define-color headerbar_bg_color #141414;
+@define-color headerbar_fg_color #e0e0e0;
+@define-color card_bg_color #1a1a1a;
+@define-color card_fg_color #e0e0e0;
+@define-color popover_bg_color #141414;
+@define-color popover_fg_color #e0e0e0;
+@define-color dialog_bg_color #141414;
+@define-color dialog_fg_color #e0e0e0;
+
+window,
+.background {
+    background-color: #0a0a0a;
+    color: #e0e0e0;
+}
+
+headerbar,
+notebook > header {
+    background-color: #141414;
+    color: #e0e0e0;
+    border-bottom: 1px solid #262626;
+}
+
+notebook > stack {
+    background-color: #0a0a0a;
+}
+
+/* Sekmelër (Tabs) */
+notebook > header > tabs > tab {
+    color: #7a756f;
+    padding: 6px 14px;
+}
+
+notebook > header > tabs > tab:checked {
+    color: #d6a259;
+    box-shadow: inset 0 -3px #d23d50;
+}
+
+/* Kaydırıcılar (Sliders) ve Seviye Çubukları */
+scale > trough > highlight,
+progressbar > trough > progress,
+levelbar > trough > block.filled {
+    background-color: #d23d50;
+    border-color: #d23d50;
+}
+
+scale > trough,
+progressbar > trough,
+levelbar > trough {
+    background-color: #262626;
+}
+
+scale > trough > slider {
+    background-color: #e0e0e0;
+    border: 2px solid #d23d50;
+}
+
+scale > trough > slider:hover {
+    background-color: #d6a259;
+}
+
+/* Düğmelër ve Açılır Menülër */
+button,
+dropdown > button {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    border: 1px solid #333333;
+}
+
+button:hover,
+dropdown > button:hover {
+    border-color: #d23d50;
+    color: #d6a259;
+}
+
+button:checked,
+button.suggested-action {
+    background-color: #d23d50;
+    color: #e0e0e0;
+}

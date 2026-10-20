@@ -8,7 +8,7 @@ hijri_months = {
     2: "Safër",
     3: "Rebii ül-Evvël",
     4: "Rebii ül-Aahir",
-    5: "Cemaazii el-evvël",
+    5: "Cemaazii el-Evvël",
     6: "Cemaazii el-Aahir",
     7: "Recep",
     8: "Şaaban",

@@ -32,6 +32,7 @@ label:focus {
 }
 
 #clock,
+#mpris,
 #battery,
 #network,
 #pulseaudio,
@@ -42,10 +43,27 @@ label:focus {
     color: #ffffff;
 }
 
-/* ---- SOL: SAAT ---- */
+/* ---- SOL: SAAT VE MÜZİK ---- */
 #clock {
     background-color: transparent;
     color: #9f334d;
+    text-shadow:
+        0 0 2px #000000,
+        0 0 2px #000000,
+        0 0 2px #000000;
+}
+
+#mpris {
+    background-color: transparent;
+    color: #d6a259; /* Boz Sarı */
+    text-shadow:
+        0 0 2px #000000,
+        0 0 2px #000000,
+        0 0 2px #000000;
+}
+
+#mpris.paused {
+    color: #7a756f;
 }
 
 /* ---- ORTA: UYGULAMA NOKTALARI ---- */

@@ -1,3 +1,9 @@
 {
-    "colorscheme": "simple",
+    "autoindent": true,
+    "colorscheme": "kara-kizil",
+    "hlsearch": true,
+    "mkparents": true,
+    "scrollbar": true,
+    "tabsize": 4,
+    "tabstospaces": true
 }

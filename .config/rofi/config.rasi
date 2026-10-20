@@ -12,45 +12,51 @@ configuration {
 
 /* ---- RENK PALETİ ---- */
 * {
-    bg:            #1a1a1a; /* Kara */
-    fg:            #e0e0e0; /* Ak */
-    alt-bg:        #1a1a1a; /* Kara */
+    bg:            #050505d9; /* Kara (Cam Opaklığı) */
+    fg:            #e0e0e0;   /* Ak */
+    alt-bg:        transparent;
 
-    selected-bg:   #d23d50; /* Kızıl */
-    selected-fg:   #d6a259; /* Boz Sarı */
+    selected-bg:   #d23d50;   /* Kızıl */
+    selected-fg:   #d6a259;   /* Boz Sarı */
 
-    border-col:    #d23d50; /* Kızıl */
-    separator-col: #d6a259; /* Boz Sarı */
+    border-col:    #d23d50;   /* Kızıl */
+    separator-col: #d6a259;   /* Boz Sarı */
 
-    urgent-bg:     #cade25; /* Sarı */
-    active-bg:     #368e5c; /* Yeşil */
+    urgent-bg:     #cade25;   /* Sarı */
+    active-bg:     #368e5c;   /* Yeşil */
 
-    background-color: @bg;
+    background-color: transparent;
     text-color:       @fg;
 }
 
 /* ---- PENCERE VE BİLEŞËNLËR ---- */
 window {
     background-color: @bg;
+    border:           2px;
     border-color:     @border-col;
+    border-radius:    12px;
+    padding:          15px;
+    width:            520px;
 }
 
 mainbox {
-    background-color: @bg;
+    background-color: transparent;
+    spacing:          10px;
 }
 
 inputbar {
-    background-color: @bg;
+    background-color: transparent;
     text-color:       @fg;
+    padding:          4px;
 }
 
 prompt {
-    background-color: @bg;
+    background-color: transparent;
     text-color:       @separator-col;
 }
 
 entry {
-    background-color:  @bg;
+    background-color:  transparent;
     text-color:        @fg;
     placeholder:       "Filtrelemek için yazın";
     placeholder-color: #7a756f;
@@ -63,33 +69,40 @@ num-rows {
 }
 
 case-indicator {
-    background-color: @bg;
+    background-color: transparent;
     text-color:       @fg;
 }
 
 listview {
-    background-color: @bg;
+    background-color: transparent;
     border-color:     @separator-col;
+    spacing:          4px;
+    lines:            8;
 }
 
 scrollbar {
-    background-color: @bg;
+    background-color: transparent;
     handle-color:     @border-col;
 }
 
 message {
-    background-color: @bg;
+    background-color: transparent;
     border-color:     @separator-col;
 }
 
 textbox {
-    background-color: @bg;
+    background-color: transparent;
     text-color:       @fg;
 }
 
 /* ---- LİSTE ÖĞELËRİ ---- */
+element {
+    padding:       6px 10px;
+    border-radius: 6px;
+}
+
 element normal.normal {
-    background-color: @bg;
+    background-color: transparent;
     text-color:       @fg;
 }
 

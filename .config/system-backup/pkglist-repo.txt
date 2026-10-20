@@ -19,6 +19,7 @@ cava
 cfitsio
 chromium
 clamav
+cliphist
 cpupower
 croc
 cuda
@@ -65,9 +66,11 @@ headsetcontrol
 hexyl
 httrack
 hyprgraphics
+hypridle
 hyprland
 hyprland-qt-support
 hyprlang
+hyprlock
 hyprpaper
 hyprpolkitagent
 hyprshutdown
