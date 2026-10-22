@@ -191,6 +191,7 @@ swayimg
 syncplay
 sysstat
 telegram-desktop
+thermald
 tk
 torbrowser-launcher
 translate-shell
