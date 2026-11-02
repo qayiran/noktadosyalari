@@ -7,10 +7,10 @@
 
 -- Bak https://wiki.hypr.land/Configuring/Basics/Monitors/
 hl.monitor({
-    output   = "",
-    mode     = "highres",
-    position = "auto",
-    scale    = "1.6",
+    output    = "",
+    mode      = "highres",
+    position  = "auto",
+    scale     = "1.6",
     transform = 0,
 })
 
@@ -18,6 +18,7 @@ hl.monitor({
 ----------------------
 ---- PROGRAMLARIM ----
 ----------------------
+
 local terminal    = "foot"
 local fileManager = "foot -e yazi"
 local menu        = "rofi -show run"
@@ -31,15 +32,13 @@ local menu        = "rofi -show run"
 hl.on("hyprland.start", function ()
     -- Sistëm ve Masa Üstü
     hl.exec_cmd("plymouth --quit")
-    
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY HYPRLAND_INSTANCE_SIGNATURE")
-    hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY")
-    
+
     hl.exec_cmd("systemctl --user start dunst")
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
-    
+
     hl.exec_cmd("xdg-user-dirs-update")
-    
+
     hl.exec_cmd("steam -silent")
     hl.exec_cmd("xrdb -merge ~/.Xresources")
     hl.exec_cmd("vesktop --start-minimized")
@@ -85,6 +84,8 @@ hl.env("HYPRCURSOR_THEME", "Posy_Cursor")
 hl.env("HYPRCURSOR_SIZE", "32")
 
 hl.env("QT_QPA_PLATFORM", "wayland")
+hl.env("QT_USE_PORTAL", "1")
+hl.env("QT_QPA_PLATFORMTHEME", "xdgdesktopportal")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 
 -- Hibrit GPU (iGPU masaüstü + dGPU oyun/YZ)
@@ -92,9 +93,6 @@ hl.env("AQ_DRM_DEVICES", "/dev/dri/by-path/pci-0000:00:02.0-card:/dev/dri/by-pat
 hl.env("LIBVA_DRIVER_NAME", "iHD")
 
 hl.env("XKB_CONFIG_HOME", "$HOME/.config/xkb")
-
-hl.env("QT_USE_PORTAL", "1")
-hl.env("QT_QPA_PLATFORMTHEME", "xdgdesktopportal")
 
 
 ------------------------
@@ -104,9 +102,8 @@ hl.env("QT_QPA_PLATFORMTHEME", "xdgdesktopportal")
 -- Başvur https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
     general = {
-        gaps_in  = 5,
-        gaps_out = "10",
-        
+        gaps_in     = 5,
+        gaps_out    = "10",
         border_size = 2,
 
         -- Renklër
@@ -117,11 +114,10 @@ hl.config({
 
         -- Boyutlandırma
         resize_on_border = false,
-        
-        layout = "dwindle",
+        layout           = "dwindle",
 
         -- Yırtılma
-        allow_tearing = true, 
+        allow_tearing = true,
     },
 
     decoration = {
@@ -141,69 +137,32 @@ hl.config({
 
         -- Bulanıklık (Blur)
         blur = {
-            enabled   = true,
-            size      = 3,
-            passes    = 1,
-            vibrancy  = 0.1696,
-            xray      = true,
+            enabled  = true,
+            size     = 3,
+            passes   = 1,
+            vibrancy = 0.1696,
+            xray     = true,
         },
     },
 
     animations = {
         enabled = true,
     },
-})
 
-hl.curve("easeOutQuint",   { type = "bezier", points = { {0.23, 1},    {0.32, 1}    } })
-hl.curve("easeInOutCubic", { type = "bezier", points = { {0.65, 0.05}, {0.36, 1}    } })
-hl.curve("linear",         { type = "bezier", points = { {0, 0},       {1, 1}       } })
-hl.curve("almostLinear",   { type = "bezier", points = { {0.5, 0.5},   {0.75, 1}    } })
-hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1}     } })
-
-hl.animation({ leaf = "global",        enabled = true,  speed = 10,   bezier = "default" })
-hl.animation({ leaf = "border",        enabled = true,  speed = 5.39, bezier = "easeOutQuint" })
-hl.animation({ leaf = "windows",       enabled = true,  speed = 4.79, bezier = "easeOutQuint" })
-hl.animation({ leaf = "windowsIn",     enabled = true,  speed = 4.1,  bezier = "easeOutQuint", style = "popin 87%" })
-hl.animation({ leaf = "windowsOut",    enabled = true,  speed = 1.49, bezier = "linear",       style = "popin 87%" })
-hl.animation({ leaf = "fadeIn",        enabled = true,  speed = 1.73, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeOut",       enabled = true,  speed = 1.46, bezier = "almostLinear" })
-hl.animation({ leaf = "fade",          enabled = true,  speed = 3.03, bezier = "quick" })
-hl.animation({ leaf = "layers",        enabled = true,  speed = 3.81, bezier = "easeOutQuint" })
-hl.animation({ leaf = "layersIn",      enabled = true,  speed = 4,    bezier = "easeOutQuint", style = "fade" })
-hl.animation({ leaf = "layersOut",     enabled = true,  speed = 1.5,  bezier = "linear",       style = "fade" })
-hl.animation({ leaf = "fadeLayersIn",  enabled = true,  speed = 1.79, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeLayersOut", enabled = true,  speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
-
--- Daha fazlası için bak https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/
-hl.config({
+    -- Daha fazlası için bak https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/
     dwindle = {
-        preserve_split = true, 
+        preserve_split = true,
     },
-})
 
--- Daha fazlası için https://wiki.hypr.land/Configuring/Layouts/Master-Layout/
-hl.config({
+    -- Daha fazlası için https://wiki.hypr.land/Configuring/Layouts/Master-Layout/
     master = {
         new_status = "master",
     },
-})
 
-hl.config({
     xwayland = {
         force_zero_scaling = true,
-    }
-})
+    },
 
-
----------------
----- DİĞËR ----
----------------
-
-hl.config({
     misc = {
         force_default_wallpaper    = -1,
         disable_hyprland_logo      = true,
@@ -211,13 +170,38 @@ hl.config({
         focus_on_activate          = true,
         vrr                        = 2,
     },
+
     render = {
         direct_scanout = 2,
     },
+
     cursor = {
         no_hardware_cursors = 0,
     },
 })
+
+hl.curve("easeOutQuint", { type = "bezier", points = { {0.23, 1},  {0.32, 1}   } })
+hl.curve("linear",       { type = "bezier", points = { {0, 0},     {1, 1}      } })
+hl.curve("almostLinear", { type = "bezier", points = { {0.5, 0.5}, {0.75, 1}   } })
+hl.curve("quick",        { type = "bezier", points = { {0.15, 0},  {0.1, 1}    } })
+
+hl.animation({ leaf = "global",        enabled = true, speed = 10,   bezier = "default" })
+hl.animation({ leaf = "border",        enabled = true, speed = 5.39, bezier = "easeOutQuint" })
+hl.animation({ leaf = "windows",       enabled = true, speed = 4.79, bezier = "easeOutQuint" })
+hl.animation({ leaf = "windowsIn",     enabled = true, speed = 4.1,  bezier = "easeOutQuint", style = "popin 87%" })
+hl.animation({ leaf = "windowsOut",    enabled = true, speed = 1.49, bezier = "linear",       style = "popin 87%" })
+hl.animation({ leaf = "fadeIn",        enabled = true, speed = 1.73, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeOut",       enabled = true, speed = 1.46, bezier = "almostLinear" })
+hl.animation({ leaf = "fade",          enabled = true, speed = 3.03, bezier = "quick" })
+hl.animation({ leaf = "layers",        enabled = true, speed = 3.81, bezier = "easeOutQuint" })
+hl.animation({ leaf = "layersIn",      enabled = true, speed = 4,    bezier = "easeOutQuint", style = "fade" })
+hl.animation({ leaf = "layersOut",     enabled = true, speed = 1.5,  bezier = "linear",       style = "fade" })
+hl.animation({ leaf = "fadeLayersIn",  enabled = true, speed = 1.79, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" })
+hl.animation({ leaf = "workspaces",    enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "workspacesIn",  enabled = true, speed = 1.21, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "zoomFactor",    enabled = true, speed = 7,    bezier = "quick" })
 
 
 ---------------
@@ -226,19 +210,11 @@ hl.config({
 
 hl.config({
     input = {
-        kb_layout = "tr_custom",
-        
-        kb_variant = "",
-        kb_model = "",
-        kb_options = "",
-        kb_rules = "",
-
+        kb_layout          = "tr_custom",
         numlock_by_default = true,
-        
-        follow_mouse = 1,
-        
-        sensitivity = 0, -- -1.0 - 1.0, 0 düzënleme yok demek.
-        accel_profile = "flat", -- Bu faare ivmelenimini kapatır.
+        follow_mouse       = 1,
+        sensitivity        = 0,      -- -1.0 - 1.0, 0 düzënleme yok demek.
+        accel_profile      = "flat", -- Bu faare ivmelenimini kapatır.
 
         touchpad = {
             natural_scroll = false,
@@ -251,9 +227,9 @@ hl.config({
 })
 
 hl.gesture({
-    fingers = 3,
+    fingers   = 3,
     direction = "horizontal",
-    action = "workspace"
+    action    = "workspace",
 })
 
 
@@ -285,10 +261,10 @@ hl.bind(mainMod .. " + V", function()
         hl.dispatch(hl.dsp.window.float({ action = "disable" }))
     end
 end)
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(mainMod .. " + P",   hl.dsp.window.pseudo())
+hl.bind(mainMod .. " + J",   hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + L",   hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + M",   hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + F11", hl.dsp.window.fullscreen())
 
 -- Odak
@@ -332,7 +308,7 @@ hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 
 -- Resim & Video Kaydı
-hl.bind("Print", hl.dsp.exec_cmd("sh -c 'grim -g \"$(slurp)\" - | tee \"$HOME/sitelen/$(date +%Y-%m-%d_%H-%M-%S).png\" | wl-copy -t image/png'"))
+hl.bind("Print",                   hl.dsp.exec_cmd("sh -c 'grim -g \"$(slurp)\" - | tee \"$HOME/sitelen/$(date +%Y-%m-%d_%H-%M-%S).png\" | wl-copy -t image/png'"))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("$HOME/ilo/record-toggle"))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("$HOME/ilo/save_pin.fish"))
 
@@ -348,115 +324,69 @@ hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("$HOME/ilo/save_pin.fish"))
 
 -- Maksimize etme isteklerini yok say
 hl.window_rule({
-    name  = "ignore-maximize",
-    match = { class = ".*" },
+    name           = "ignore-maximize",
+    match          = { class = ".*" },
     suppress_event = "maximize",
 })
 
 -- XWayland sürüklenimini düzëlt
 hl.window_rule({
-    name  = "fix-xwayland-drag",
-    match = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false },
+    name     = "fix-xwayland-drag",
+    match    = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false },
     no_focus = true,
 })
 
 -- Spesifik Uygulama Kuralları
 
--- Hyprland Çalıştır
+-- Oyunlar
 hl.window_rule({
-    name  = "hyprland-run-float",
-    match = { class = "^(hyprland-run)$" },
-    float = true,
-    move  = "20 monitor_h-120",
-})
-
--- Telegram
-hl.window_rule({
-    name  = "telegram-opacity",
-    match = { title = "^(Telegram)$" },
-    opacity = "1.0 override",
-    no_blur = true,
-})
-
-
--- Dunst (Bildirimlër)
-hl.window_rule({
-    name  = "dunst-opacity",
-    match = { class = "^(dunst)$" },
-    opacity = "0.9 0.8",
-})
-
-hl.layer_rule({
-    name  = "notifications-blur",
-    match = { namespace = "notifications" },
-    blur = true,
-})
-
-hl.layer_rule({
-    name  = "rofi-blur",
-    match = { namespace = "rofi" },
-    blur = true,
-})
-
--- Osu! ve Cyberpunk 2077
-hl.window_rule({
-    name  = "osu-tearing-allow",
-    match = { class = "^(osu\\!)$" },
-    immediate = true,
-    fullscreen = true,
-})
-
-hl.window_rule({
-    name  = "cyberpunk-tearing-allow",
-    match = { class = "^(Cyberpunk 2077)$" },
-    immediate = true,
-    fullscreen = true,
-})
-
-hl.window_rule({
-    name  = "steam-games-tearing-allow",
-    match = { class = "^(steam_app_.*|gamescope)$" },
+    name      = "games-tearing-allow",
+    match     = { class = "^(steam_app_.*|gamescope|osu\\!)$" },
     immediate = true,
 })
 
--- Sims
+-- Sims ve Photoshop
 hl.window_rule({
-    name  = "sims-float-center",
-    match = { class = "^(Sims\\.exe)$" },
-    float = true,
-    center = true,
+    name    = "apps-float-center",
+    match   = { class = "^(Sims\\.exe|steam_app_3042768914)$" },
+    float   = true,
+    center  = true,
     monitor = 0,
 })
 
 -- Pinterest Zımbırtısı
 hl.window_rule({
-    name  = "pinterest-widget-float",
-    match = { class = "^(pin_widget)$" },
-    float = true,
-    workspace = "1",
-    size = "300 450",
-    move = "monitor_w-330 30",
-    no_focus = true,
-    no_shadow = true,
-    no_blur = true,
+    name        = "pinterest-widget-float",
+    match       = { class = "^(pin_widget)$" },
+    float       = true,
+    workspace   = "1",
+    size        = "300 450",
+    move        = "monitor_w-330 30",
+    no_focus    = true,
+    no_shadow   = true,
+    no_blur     = true,
     border_size = 0,
-})
-
--- Photoshop
-hl.window_rule({
-    name  = "photoshop-float-center",
-    match = { class = "^(steam_app_3042768914)$" },
-    float = true,
-    center = true,
-    monitor = 0,
 })
 
 -- Ses Karıştırıcısı (Pavucontrol / Pulsemixer)
 hl.window_rule({
-    name  = "audio-mixer-float",
-    match = { class = "^(org\\.pulseaudio\\.pavucontrol|pulsemixer)$" },
-    float = true,
-    size = "1050 620",
-    center = true,
+    name    = "audio-mixer-float",
+    match   = { class = "^(org\\.pulseaudio\\.pavucontrol|pulsemixer)$" },
+    float   = true,
+    size    = "1050 620",
+    center  = true,
     opacity = "0.92 0.88",
+})
+
+-- Katman Kuralları (Layer Rules)
+hl.layer_rule({
+    name  = "notifications-blur",
+    match = { namespace = "notifications" },
+    blur  = true,
+})
+
+hl.layer_rule({
+    name  = "rofi-blur",
+    match = { namespace = "rofi" },
+    blur  = true,
 })
