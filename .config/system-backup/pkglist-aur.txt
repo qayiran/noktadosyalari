@@ -15,6 +15,8 @@ flashpoint-launcher-bin
 golly
 golly-debug
 gpu-screen-recorder-gtk
+gpu-unlock-dkms
+gpu-unlock-firmware
 gtk2
 hunspell-tr
 hyprshade
@@ -30,6 +32,7 @@ msi-perkeyrgb
 needrestart
 oneko
 onlyoffice-bin
+ookla-speedtest-bin
 osu-lazer-bin
 paru
 pipeasio-bin

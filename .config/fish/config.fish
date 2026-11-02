@@ -3,6 +3,7 @@
 # -----------------------------------------
 
 set -gx EDITOR micro
+set -gx CUDA_CACHE_MAXSIZE 4294967296
 
 # Go
 set -gx GOPATH $HOME/.local/share/go
@@ -161,8 +162,8 @@ alias atak="hyprshutdown -t 'Shutting down...' --post-cmd 'shutdown -P 0'"
 alias atgöy="hyprshutdown -t 'Restarting...' --post-cmd 'reboot'"
 
 # Yapay Zëka (YZ)
-alias comfy="cd ~/qayiran/ijo/YZ/ComfyUI; source .venv/bin/activate.fish; python main.py"
-alias comfy-net="cd ~/qayiran/ijo/YZ/ComfyUI; source .venv/bin/activate.fish; python main.py --listen 0.0.0.0"
+alias comfy="cd ~/qayiran/ijo/YZ/ComfyUI; source .venv/bin/activate.fish; python main.py --use-sage-attention --enable-triton-backend --fast cublas_ops autotune fp8_matrix_mult --highvram"
+alias comfy-net="cd ~/qayiran/ijo/YZ/ComfyUI; source .venv/bin/activate.fish; python main.py --listen 0.0.0.0 --use-sage-attention --enable-triton-backend --fast cublas_ops autotune fp8_matrix_mult --highvram"
 alias nemo='cd ~/qayiran/ijo/YZ/; ./start_ai.sh'
 
 # Uygulamalar ve Oyunlar

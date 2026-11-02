@@ -87,10 +87,9 @@ hl.env("HYPRCURSOR_SIZE", "32")
 hl.env("QT_QPA_PLATFORM", "wayland")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 
--- Nvidia için
-hl.env("LIBVA_DRIVER_NAME", "nvidia")
-hl.env("GBM_BACKEND", "nvidia-drm")
-hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
+-- Hibrit GPU (iGPU masaüstü + dGPU oyun/YZ)
+hl.env("AQ_DRM_DEVICES", "/dev/dri/by-path/pci-0000:00:02.0-card:/dev/dri/by-path/pci-0000:01:00.0-card")
+hl.env("LIBVA_DRIVER_NAME", "iHD")
 
 hl.env("XKB_CONFIG_HOME", "$HOME/.config/xkb")
 
@@ -146,6 +145,7 @@ hl.config({
             size      = 3,
             passes    = 1,
             vibrancy  = 0.1696,
+            xray      = true,
         },
     },
 
@@ -214,6 +214,9 @@ hl.config({
     render = {
         direct_scanout = 2,
     },
+    cursor = {
+        no_hardware_cursors = 0,
+    },
 })
 
 
@@ -240,6 +243,10 @@ hl.config({
         touchpad = {
             natural_scroll = false,
         },
+
+        tablet = {
+            enabled = false,
+        },
     },
 })
 
@@ -255,7 +262,6 @@ hl.gesture({
 -----------------------
 
 local mainMod = "SUPER" -- "Windows" tuşunu ana düzënleyici olarak belirlër.
-local is_custom_floating = false
 
 -- Daha fazlası için https://wiki.hypr.land/Configuring/Basics/Binds/
 
@@ -269,8 +275,9 @@ hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("$HOME/ilo/toggle_fans.sh"))
 -- Pencere Yönetimi
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + V", function()
-    is_custom_floating = not is_custom_floating
-    if is_custom_floating then
+    local win = hl.get_active_window()
+    if not win then return end
+    if not win.floating then
         hl.dispatch(hl.dsp.window.float({ action = "enable" }))
         hl.dispatch(hl.dsp.window.resize({ x = 1280, y = 720 }))
         hl.dispatch(hl.dsp.window.center())
@@ -404,6 +411,12 @@ hl.window_rule({
     match = { class = "^(Cyberpunk 2077)$" },
     immediate = true,
     fullscreen = true,
+})
+
+hl.window_rule({
+    name  = "steam-games-tearing-allow",
+    match = { class = "^(steam_app_.*|gamescope)$" },
+    immediate = true,
 })
 
 -- Sims
