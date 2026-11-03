@@ -1,6 +1,9 @@
 {
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
     "logo": {
+        "padding": {
+            "top": 1
+        },
         "color": {
             "1": "38;2;210;61;80",
             "2": "38;2;210;61;80"
@@ -15,35 +18,45 @@
     "modules": [
         "title",
         "separator",
-        { "type": "os",           "key": "İşletim Sistemi" },
+        { "type": "os",             "key": "İşletim Sistemi" },
         {
             "type": "command",
             "key":  "Sistëm Yaşı",
             "text": "echo $(( ($(date +%s) - $(date -d $(head -n1 /var/log/pacman.log | cut -d ' ' -f 1 | tr -d '[]') +%s)) / 86400 )) gün"
         },
-        { "type": "host",         "key": "Cihaz" },
-        { "type": "kernel",       "key": "Çekirdek" },
-        { "type": "packages",     "key": "Paketlër" },
-        { "type": "shell",        "key": "Kabuk" },
-        { "type": "display",      "key": "Ekran" },
-        { "type": "de",           "key": "Masaüstü Ortamı" },
-        { "type": "wm",           "key": "Pencere Yöneticisi" },
-        { "type": "wmtheme",      "key": "Pencere Teması" },
-        { "type": "cursor",       "key": "İmleç" },
-        { "type": "terminal",     "key": "Uç Birim" },
-        { "type": "terminalfont", "key": "Uç Birim Yazı Tipi" },
-        { "type": "cpu",          "key": "İşlëmci" },
-        { "type": "gpu",          "key": "Grafik İşlëmci" },
-        { "type": "memory",       "key": "Bëllek" },
-        { "type": "swap",         "key": "Takas Alanı" },
-        { "type": "disk",         "key": "Disk ({1})" },
+        { "type": "board",          "key": "Cihaz" },
+        { "type": "kernel",         "key": "Çekirdek" },
+        { "type": "packages",       "key": "Paketlër" },
+        { "type": "shell",          "key": "Kabuk" },
+        { "type": "display",        "key": "Ekran",          "format": "{name} ({width}x{height} @ {scale-factor}x in {inch}\", {refresh-rate} Hz) [{type}]" },
+        { "type": "wm",             "key": "Pencere Yöneticisi" },
+        { "type": "cursor",         "key": "İmleç" },
+        { "type": "terminal",       "key": "Uç Birim" },
+        { "type": "terminalfont",   "key": "Uç Birim Yazı Tipi" },
+        { "type": "cpu",            "key": "İşlëmci",        "format": "{vendor} {code-name} ({core-types}) @ {freq-max}" },
+        {
+            "type": "command",
+            "key":  "Grafik İşlëmci",
+            "text": "echo \"$(lspci -nn -s 01:00.0 | sed -E 's/.*: (.*) Corporation (.*) \\[.*\\] (\\[[0-9a-f:]+\\]).*/\\1 \\2 \\3/') $(fastfetch -c none -l none --pipe -s gpu | awk 'NR==1{print $NF}')\""
+        },
+        {
+            "type": "command",
+            "key":  "Grafik İşlëmci",
+            "text": "echo \"$(lspci -nn -s 00:02.0 | sed -E 's/.*: (.*) Corporation (.*) (\\[[0-9a-f:]+\\]).*/\\1 \\2 \\3/') $(fastfetch -c none -l none --pipe -s gpu | awk 'NR==2{print $NF}')\""
+        },
+        {
+            "type": "command",
+            "key":  "Bëllek",
+            "text": "fastfetch -c none -l none --pipe false -s memory:physicalmemory | awk -F': ' 'NR==1{m=$2} NR==2{sub(/^.* - /,\"\",$2); print m \" - \" $2}'"
+        },
+        { "type": "physicaldisk",   "key": "Fiziki Disk",    "hideVirtual": true, "format": "{name} ({size}) [{interconnect} {physical-type}]" },
+        { "type": "disk",           "key": "Disk ({mountpoint})" },
         {
             "type": "command",
             "key":  "İnternet Hızı",
             "text": "cat ~/.cache/fastfetch-speedtest.txt 2>/dev/null || echo 'Ölçülmedi'"
         },
-        { "type": "poweradapter", "key": "Güç Adaptörü" },
-        { "type": "locale",       "key": "Dil" },
+        { "type": "locale",         "key": "Dil" },
         "break",
         "colors"
     ]

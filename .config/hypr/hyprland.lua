@@ -89,7 +89,6 @@ hl.env("QT_QPA_PLATFORMTHEME", "xdgdesktopportal")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 
 -- Hibrit GPU (iGPU masaüstü + dGPU oyun/YZ)
-hl.env("AQ_DRM_DEVICES", "/dev/dri/by-path/pci-0000:00:02.0-card:/dev/dri/by-path/pci-0000:01:00.0-card")
 hl.env("LIBVA_DRIVER_NAME", "iHD")
 
 hl.env("XKB_CONFIG_HOME", "$HOME/.config/xkb")

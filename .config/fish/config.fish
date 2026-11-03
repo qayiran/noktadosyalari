@@ -167,6 +167,7 @@ alias comfy-net="cd ~/qayiran/ijo/YZ/ComfyUI; source .venv/bin/activate.fish; py
 alias nemo='cd ~/qayiran/ijo/YZ/; ./start_ai.sh'
 
 # Uygulamalar ve Oyunlar
+alias pin="$HOME/ilo/pin_loop.fish refresh"
 alias imageranker="cd ~/ilo/image-ranker; source .venv/bin/activate.fish; image-ranker"
 alias JDownloader2="nohup ~/.local/share/jd2/JDownloader2 >/dev/null 2>&1 & disown"
 alias tetris='retroarch -L /usr/lib/libretro/nestopia_libretro.so "$HOME/qayiran/ijo/SOB/Tetris (USA).nes" &> /dev/null & disown'
@@ -203,10 +204,6 @@ end
 function waifu
     nohup waifudownloader >/dev/null 2>&1 &
     disown
-end
-
-function zap
-    env QT_QPA_PLATFORM=xcb zapzap > /dev/null 2>&1 & disown
 end
 
 function sor
