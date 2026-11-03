@@ -37,6 +37,11 @@
         { "type": "memory",       "key": "Bëllek" },
         { "type": "swap",         "key": "Takas Alanı" },
         { "type": "disk",         "key": "Disk ({1})" },
+        {
+            "type": "command",
+            "key":  "İnternet Hızı",
+            "text": "cat ~/.cache/fastfetch-speedtest.txt 2>/dev/null || echo 'Ölçülmedi'"
+        },
         { "type": "poweradapter", "key": "Güç Adaptörü" },
         { "type": "locale",       "key": "Dil" },
         "break",

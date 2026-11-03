@@ -1,0 +1,9 @@
+[Unit]
+Description=Update Fastfetch Speedtest Cache
+After=network-online.target
+
+[Service]
+Type=oneshot
+Nice=19
+IOSchedulingClass=idle
+ExecStart=/usr/bin/fish %h/ilo/speedtest-cache.fish

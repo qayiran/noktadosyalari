@@ -89,6 +89,7 @@ set safe_files \
     $HOME/ilo/record-toggle \
     $HOME/ilo/osd.fish \
     $HOME/ilo/idle-ctl.fish \
+    $HOME/ilo/speedtest-cache.fish \
     $HOME/ilo/toggle_fans.sh \
     $HOME/ilo/vivaldi-fix.sh \
     $HOME/ilo/pin_loop.fish \

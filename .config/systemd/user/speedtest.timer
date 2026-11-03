@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Speedtest Every 6 Hours for Fastfetch
+
+[Timer]
+OnCalendar=*-*-* 00/6:00:00
+RandomizedDelaySec=5min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
