@@ -72,7 +72,8 @@ set safe_folders \
     .config/xdg-desktop-portal \
     .config/xkb \
     .config/xsettingsd \
-    .config/yazi
+    .config/yazi \
+    .local/share/easyeffects
 
 echo "Scanning safe folders for new files..."
 for folder in $safe_folders
@@ -92,6 +93,7 @@ set safe_files \
     $HOME/ilo/speedtest-cache.fish \
     $HOME/ilo/toggle_fans.sh \
     $HOME/ilo/vivaldi-fix.sh \
+    $HOME/ilo/vivaldi-dgpu.sh \
     $HOME/ilo/pin_loop.fish \
     $HOME/ilo/save_pin.fish \
     $HOME/ilo/pinterest_scraper.py \

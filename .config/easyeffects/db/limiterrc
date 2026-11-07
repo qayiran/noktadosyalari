@@ -1,2 +1,4 @@
 [soe][Limiter#0]
-threshold=-1
+alr=true
+gainBoost=false
+threshold=-0.5

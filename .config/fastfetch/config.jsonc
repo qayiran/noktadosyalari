@@ -49,11 +49,11 @@
             "key":  "Bëllek",
             "text": "fastfetch -c none -l none --pipe false -s memory:physicalmemory | awk -F': ' 'NR==1{m=$2} NR==2{sub(/^.* - /,\"\",$2); print m \" - \" $2}'"
         },
-        { "type": "physicaldisk",   "key": "Fiziki Disk",    "hideVirtual": true, "format": "{name} ({size}) [{interconnect} {physical-type}]" },
+        { "type": "physicaldisk",   "key": "Fiziikii Disk",    "hideVirtual": true, "format": "{name} ({size}) [{interconnect} {physical-type}]" },
         { "type": "disk",           "key": "Disk ({mountpoint})" },
         {
             "type": "command",
-            "key":  "İnternet Hızı",
+            "key":  "İntërnet Hızı",
             "text": "cat ~/.cache/fastfetch-speedtest.txt 2>/dev/null || echo 'Ölçülmedi'"
         },
         { "type": "locale",         "key": "Dil" },
