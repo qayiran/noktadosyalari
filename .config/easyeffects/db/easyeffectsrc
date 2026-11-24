@@ -9,9 +9,9 @@ visiblePage=pluginsPage
 mostUsedPresets=vox,vox-plus
 outputDevice=alsa_output.usb-SteelSeries_Arctis_Nova_Pro_Wireless-00.analog-stereo
 plugins=reverb#0,convolver#0,equalizer#0,stereo_tools#0
-usedPresets=vox:19,vox-plus:9
+usedPresets=vox:21,vox-plus:11
 visiblePage=pluginsPage
-visiblePlugin=reverb#0
+visiblePlugin=stereo_tools#0
 
 [Window]
 autostartOnLogin=true

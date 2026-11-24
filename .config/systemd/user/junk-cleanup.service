@@ -1,0 +1,8 @@
+[Unit]
+Description=Routine Safe Junk & Cache Cleanup (User)
+
+[Service]
+Type=oneshot
+Nice=19
+IOSchedulingClass=idle
+ExecStart=/usr/bin/python3 %h/ilo/junk-cleanup

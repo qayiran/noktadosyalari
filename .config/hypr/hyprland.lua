@@ -58,7 +58,7 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("waybar")
     hl.exec_cmd("nm-applet --indicator")
     hl.exec_cmd("hypridle")
-    hl.exec_cmd("wl-paste --watch cliphist store")
+    hl.exec_cmd("wl-paste --watch $HOME/ilo/pano store")
 
     -- Ses
     hl.exec_cmd("easyeffects --gapplication-service")
@@ -175,7 +175,7 @@ hl.config({
     },
 
     cursor = {
-        no_hardware_cursors = 0,
+        no_hardware_cursors = true,
     },
 })
 
@@ -241,10 +241,12 @@ local mainMod = "SUPER" -- "Windows" tuşunu ana düzënleyici olarak belirlër.
 -- Daha fazlası için https://wiki.hypr.land/Configuring/Basics/Binds/
 
 -- Uygulama Başlatıcılar
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + Q",         hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("foot --app-id=foot-float"))
+hl.bind(mainMod .. " + E",         hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("sh -c 'cliphist list | rofi -dmenu -p \"pano\" | cliphist decode | wl-copy'"))
+hl.bind(mainMod .. " + B",         hl.dsp.exec_cmd("$HOME/ilo/pano menu"))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("$HOME/ilo/pano images"))
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("$HOME/ilo/toggle_fans.sh"))
 
 -- Pencere Yönetimi
@@ -375,6 +377,164 @@ hl.window_rule({
     size    = "1050 620",
     center  = true,
     opacity = "0.92 0.88",
+})
+
+-- Resim Görüntüleyicilër (Swayimg / Imv / Nsxiv)
+hl.window_rule({
+    name        = "image-viewer-float",
+    match       = { class = "^(swayimg|imv|[Nn]sxiv)$" },
+    float       = true,
+    size        = "1280 800",
+    center      = true,
+    no_shadow   = true,
+    no_blur     = true,
+    border_size = 0,
+})
+
+-- Telegram Arama ve Ortam Pencereleri
+hl.window_rule({
+    name   = "telegram-call-float",
+    match  = {
+        class         = "^(org\\.telegram\\.desktop)$",
+        initial_title = "negative:^(Telegram|Media viewer|Ortam görüntüleyici)$",
+    },
+    float  = true,
+    size   = "420 620",
+    center = true,
+})
+
+hl.window_rule({
+    name   = "telegram-media-float",
+    match  = {
+        class         = "^(org\\.telegram\\.desktop)$",
+        initial_title = "^(Media viewer|Ortam görüntüleyici)$",
+    },
+    float  = true,
+    size   = "1280 800",
+    center = true,
+})
+
+-- Steam, Discord, Vesktop ve ZapZap Ek Pencereleri
+hl.window_rule({
+    name   = "steam-popups-float",
+    match  = {
+        class         = "^(steam)$",
+        initial_title = "negative:^(Steam)$",
+    },
+    float  = true,
+    center = true,
+})
+
+hl.window_rule({
+    name   = "discord-popups-float",
+    match  = {
+        class         = "^(vesktop|discord)$",
+        initial_title = "negative:^((\\([0-9]+\\) )?(Discord|Vesktop)( [|-].*)?|.* [-|] Discord)$",
+    },
+    float  = true,
+    center = true,
+})
+
+hl.window_rule({
+    name   = "zapzap-popups-float",
+    match  = {
+        class         = "^(zapzap|com\\.rtosta\\.zapzap)$",
+        initial_title = "negative:^(ZapZap)$",
+    },
+    float  = true,
+    center = true,
+})
+
+-- Resim İçinde Resim (PiP), Apple Music ve Video Oynatıcı (mpv)
+hl.window_rule({
+    name              = "pip-float",
+    match             = { title = "^(Picture-in-Picture|Resim içinde resim)$" },
+    float             = true,
+    pin               = true,
+    keep_aspect_ratio = true,
+    size              = "480 270",
+    move              = "monitor_w-500 50",
+})
+
+hl.window_rule({
+    name   = "apple-music-float",
+    match  = { class = "^(crx_blgdilankhbcpipclgpdndahbehalgkh)$" },
+    float  = true,
+    size   = "1100 720",
+    center = true,
+})
+
+hl.window_rule({
+    name              = "mpv-float",
+    match             = { class = "^(mpv)$" },
+    float             = true,
+    keep_aspect_ratio = true,
+    size              = "1280 720",
+    center            = true,
+})
+
+-- Portallar, Modallar, Yetkilendirme ve Wine İletişim Kutuları
+hl.window_rule({
+    name   = "portals-float",
+    match  = { class = "^(xdg-desktop-portal-gtk|org\\.freedesktop\\.impl\\.portal\\.desktop\\.kde)$" },
+    float  = true,
+    size   = "1050 680",
+    center = true,
+})
+
+hl.window_rule({
+    name   = "modal-dialogs-float",
+    match  = { modal = true },
+    float  = true,
+    center = true,
+})
+
+hl.window_rule({
+    name       = "polkit-float",
+    match      = { class = "^(hyprpolkitagent|org\\.kde\\.polkit-kde-authentication-agent-1)$" },
+    float      = true,
+    center     = true,
+    dim_around = true,
+})
+
+hl.window_rule({
+    name   = "wine-dialogs-float",
+    match  = { class = "^(org\\.gnome\\.Zenity|zenity|winetricks|steam_app_0)$" },
+    float  = true,
+    center = true,
+})
+
+-- Yardımcı Araçlar ve Yüzer Uçbirim
+hl.window_rule({
+    name   = "network-editor-float",
+    match  = { class = "^(nm-connection-editor)$" },
+    float  = true,
+    size   = "680 560",
+    center = true,
+})
+
+hl.window_rule({
+    name   = "recorder-gui-float",
+    match  = { class = "^(com\\.dec05eba\\.gpu_screen_recorder|gpu-screen-recorder-gtk)$" },
+    float  = true,
+    size   = "900 620",
+    center = true,
+})
+
+hl.window_rule({
+    name   = "utils-float",
+    match  = { class = "^(com\\.github\\.wwmm\\.easyeffects|easyeffects|org\\.rncbc\\.qpwgraph|qpwgraph|nwg-look|gay\\.pancake\\.lsfg-vk-ui)$" },
+    float  = true,
+    size   = "1100 720",
+    center = true,
+})
+
+hl.window_rule({
+    name   = "foot-float",
+    match  = { class = "^(foot-float)$" },
+    float  = true,
+    size   = "850 520",
+    center = true,
 })
 
 -- Katman Kuralları (Layer Rules)

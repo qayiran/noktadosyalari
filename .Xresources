@@ -4,3 +4,7 @@ Nsxiv.window.foreground: #e0e0e0
 Nsxiv.bar.background:    #1a1a1a
 Nsxiv.bar.foreground:    #d23d50
 Nsxiv.bar.font:          JetBrainsMono Nerd Font:size=10
+
+! ---- İMLEÇ (XWAYLAND / X11) ----
+Xcursor.theme: Posy_Cursor
+Xcursor.size: 32

@@ -30,6 +30,7 @@ dnscrypt-proxy
 dnsmasq
 docker-buildx
 docker-compose
+dosfstools
 dunst
 easyeffects
 efibootmgr
@@ -88,6 +89,7 @@ kde-cli-tools
 keyd
 ldns
 lib32-gamemode
+lib32-mangohud
 libappindicator
 libayatana-appindicator
 libexif
@@ -215,6 +217,7 @@ wev
 wf-recorder
 wine-gecko
 wine-mono
+wireless-regdb
 wireplumber
 wl-clipboard
 woff2-font-awesome

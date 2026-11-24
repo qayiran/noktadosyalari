@@ -32,8 +32,8 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 edit = [
 	{ run = 'micro %s', desc = "micro", for = "unix", block = true },
 ]
-imv = [
-	{ run = "sh -c 'if [ \"$#\" -gt 1 ]; then imv \"$@\"; else imv -n \"$1\" \"$(dirname \"$1\")\"; fi' -- %s", orphan = true, desc = "imv", for = "linux" }
+swayimg = [
+	{ run = "sh -c 'if [ \"$#\" -gt 1 ]; then swayimg \"$@\"; else swayimg -e \"swayimg.imagelist.adjacent = true\" \"$1\"; fi' -- %s", orphan = true, desc = "swayimg", for = "linux" }
 ]
 play = [
 	{ run = 'xdg-open %s', orphan = true, desc = "Play", for = "linux" },
@@ -62,7 +62,7 @@ rules = [
 	{ mime = "application/{json,ndjson}", use = [ "edit", "reveal" ] },
 	{ mime = "*/javascript", use = [ "edit", "reveal" ] },
 	{ mime = "text/*", use = [ "edit", "reveal" ] },
-	{ mime = "image/*", use = [ "imv", "open", "reveal" ] },
+	{ mime = "image/*", use = [ "swayimg", "open", "reveal" ] },
 	{ mime = "{audio,video}/*", use = [ "mpv", "play", "reveal" ] },
 	{ mime = "inode/empty", use = [ "edit", "reveal" ] },
 	{ mime = "vfs/{absent,stale}", use = "download" },

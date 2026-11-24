@@ -18,28 +18,57 @@ pyenv init - --no-rehash | source
 fish_add_path $HOME/.grok/bin
 fish_add_path $HOME/.local/bin
 
-if status is-interactive
-    set -g nvm_default_version lts
-    zoxide init fish | source
-    fzf --fish | source
-end
-
 
 # -----------------------------------------
 # ---- OTURUM BAŞLATMA (TTY1 -> HYPRLAND) ----
 # -----------------------------------------
 
 if status is-login
-    if test (tty) = /dev/tty1; and test (whoami) = "qayiran"
-        if not start-hyprland
+    if test (tty 2>/dev/null) = /dev/tty1; and test "$USER" = "qayiran"
+        set -l log_dir "$HOME/.local/state/hyprland"
+        set -l log_file "$log_dir/start-hyprland.log"
+        mkdir -p "$log_dir"
+
+        set -l tty_size (string split ' ' -- (stty size 2>/dev/null))
+        set -l rows 24
+        set -l cols 80
+        if test (count $tty_size) -eq 2; and test "$tty_size[1]" -gt 0 -a "$tty_size[2]" -gt 0
+            set rows $tty_size[1]
+            set cols $tty_size[2]
+        end
+
+        set -l top (math "max(1, floor($rows / 2))")
+        set -l title ":: Bibbulim ::"
+        set -l sub "oturum başlatılıyor..."
+        set -l title_len (string length -- "$title")
+        set -l sub_len (string length -- "$sub")
+        set -l col1 (math "max(1, floor(($cols - $title_len) / 2) + 1)")
+        set -l col2 (math "max(1, floor(($cols - $sub_len) / 2) + 1)")
+
+        printf '\033[2J\033[?25l'
+        printf '\033[%d;%dH\033[31m:: \033[1;37mBibbulim\033[0;31m ::\033[0m' $top $col1
+        printf '\033[%d;%dH\033[2;37m%s\033[0m' (math "$top + 1") $col2 "$sub"
+
+        if not start-hyprland &> "$log_file"
+            printf '\033[2J\033[H\033[?25h'
             echo "---------------------------------------"
-            echo "Hyprland failed to start, you klutz! 💢"
-            echo "Check your config or logs with 'journalctl -xe'"
+            echo "Hyprland başlatılamadı, sakar! 💢"
+            echo "Kayıt: $log_file"
+            echo "Ayarları ya da 'journalctl -xe' kayıtlarını kontrol et."
             echo "---------------------------------------"
+            if test -s "$log_file"
+                tail -n 15 "$log_file"
+            end
         else
             exit
         end
     end
+end
+
+if status is-interactive
+    set -g nvm_default_version lts
+    zoxide init fish | source
+    fzf --fish | source
 end
 
 
@@ -123,17 +152,19 @@ end
 if status is-interactive
     set -l last_update_file ~/.config/fish/.last_update_check
     set -l current_time (date +%s)
+    set -l last_time 0
 
-    if test -f $last_update_file
-        set last_time (cat $last_update_file)
-    else
-        set last_time 0
+    if test -s $last_update_file
+        set -l raw_time (string trim -- (cat $last_update_file 2>/dev/null))
+        if string match -rq '^[0-9]+$' -- "$raw_time"
+            set last_time $raw_time
+        end
     end
 
     set -l interval 259200
-    set -l time_diff (math $current_time - $last_time)
+    set -l time_diff (math "$current_time - $last_time")
 
-    if test $time_diff -ge $interval
+    if test "$time_diff" -ge "$interval"
         echo -e "\n"
         set_color red --bold
         echo "Güncëlleme yapılmayalı 3 gün geçti."
@@ -156,7 +187,7 @@ end
 
 # Sistëm ve Yönetim
 alias :3="sudo"
-alias up='paru && date +%s > ~/.config/fish/.last_update_check'
+# 'up' işlëvi ~/.config/fish/functions/up.fish içinde tanımlı
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias atak="hyprshutdown -t 'Shutting down...' --post-cmd 'shutdown -P 0'"
 alias atgöy="hyprshutdown -t 'Restarting...' --post-cmd 'reboot'"
